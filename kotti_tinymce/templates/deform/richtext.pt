@@ -1,0 +1,3 @@
+<tal:block tal:omit-tag="" xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="deform">
+  <textarea id="${field.oid}" name="${field.name}" class="mce_editable tinymce" tal:content="structure cstruct" />
+</tal:block>

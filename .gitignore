@@ -6,6 +6,7 @@ dist/
 eggs/
 include/
 lib/
+local
 *.pyc
 *.pt.py
 .coverage
