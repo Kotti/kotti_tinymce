@@ -1,0 +1,11 @@
+Kotti.db
+kotti_tinymce.egg-info/
+bin/
+develop-eggs/
+dist/
+eggs/
+include/
+lib/
+*.pyc
+*.pt.py
+.coverage

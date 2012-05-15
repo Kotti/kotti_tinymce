@@ -1,0 +1,3 @@
+[submodule "kotti_tinymce/Products.TinyMCE"]
+	path = kotti_tinymce/Products.TinyMCE
+	url = git@github.com:dnouri/Products.TinyMCE.git
