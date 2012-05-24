@@ -1,6 +1,10 @@
+from pyramid.httpexceptions import HTTPNoContent
 from pyramid.location import lineage
 from pyramid.renderers import render
+from pyramid.response import Response
 
+from kotti.resources import Image
+from kotti.util import title_to_name
 from kotti.views.image import image_scales
 from kotti.views.image import ImageView
 from kotti.views.slots import register
@@ -83,22 +87,65 @@ def jsondetails(context, request):
     return info
 
 
+def setDescription(context, request):
+
+    context.description = request.POST["description"]
+
+    return HTTPNoContent()
+
+
 def image_view(context, request):
     return ImageView(context, request).image(
         subpath=request.subpath[-1:])
 
 
+def upload(context, request):
+
+    title = request.POST["uploadtitle"]
+    description = request.POST["uploaddescription"]
+    file = request.POST["uploadfile"]
+    mimetype = file.type
+    filename = file.filename
+    data = file.file.read()
+    size = len(data)
+
+    image = context[title_to_name(title)] = Image(
+        title=title,
+        description=description,
+        data=data,
+        filename=filename,
+        mimetype=mimetype,
+        size=size
+        )
+    return Response("""<html><head></head><body onload="window.parent.uploadOk('%s', '%s');"></body></html>""" % (
+        request.resource_url(image),
+        request.resource_url(context)
+        ))
+
+
 def includeme(config):
     config.add_view(
-            jsonimagefolderlisting,
-            name="tinymce-jsonimagefolderlisting",
-            renderer="json",
+        jsonimagefolderlisting,
+        name="tinymce-jsonimagefolderlisting",
+        renderer="json",
         )
 
     config.add_view(
-            jsondetails,
-            name="tinymce-jsondetails",
-            renderer="json",
+        jsondetails,
+        name="tinymce-jsondetails",
+        renderer="json",
+        )
+
+    config.add_view(
+        setDescription,
+        name="tinymce-setDescription",
+        renderer="json",
+        )
+
+    config.add_view(
+        upload,
+        name="tinymce-upload",
+        renderer="json",
         )
 
     config.add_route(
