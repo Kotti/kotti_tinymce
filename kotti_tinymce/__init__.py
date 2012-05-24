@@ -1,6 +1,7 @@
 from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render
 
+from kotti.views.image import image_scales
 from kotti.views.slots import register
 from kotti.views.slots import RenderEditInHead
 
@@ -54,15 +55,43 @@ def jsonimagefolderlisting(context, request):
     }
 
 
+def jsondetails(context, request):
+    scales = [{
+        "size": size,
+        "value": "image/{0}".format(name),
+        "title": "{0}x{1}".format(*size),
+        }
+        for (name, size) in image_scales.items()
+        ]
+
+    info = {
+        "uid_relative_url": "resolveuid/6d4e5e43caf04d5abbab9adfe2dcca97",
+        "thumb": request.resource_url(context) + "/image/span2",
+        "anchors": [],
+        "uid_url": request.resource_url(context),
+        "url": request.resource_url(context),
+        "title": context.title,
+        "description": context.description,
+        "scales": scales,
+        }
+
+    return info
+
+
 def image_view(context, request):
     return HTTPFound(location=request.url.replace("/@@images", ""))
 
 
 def includeme(config):
-
     config.add_view(
             jsonimagefolderlisting,
             name="tinymce-jsonimagefolderlisting",
+            renderer="json",
+        )
+
+    config.add_view(
+            jsondetails,
+            name="tinymce-jsondetails",
             renderer="json",
         )
 
