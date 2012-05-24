@@ -1,3 +1,4 @@
+from pyramid.location import lineage
 from pyramid.renderers import render
 
 from kotti.views.image import image_scales
@@ -44,7 +45,11 @@ def jsonimagefolderlisting(context, request):
     else:
         parent_url = request.resource_url(context.__parent__)
 
-    path = []  # breadcrumbs {title:"", icon:"", url:""}
+    path = [{
+        "title": i.title,
+        "url": request.resource_url(i),
+        "icon": "", } for i in reversed(list(lineage(context)))]
+
     upload_allowed = True
 
     return {
