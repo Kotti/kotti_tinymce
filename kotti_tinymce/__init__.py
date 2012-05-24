@@ -128,24 +128,28 @@ def includeme(config):
         jsonimagefolderlisting,
         name="tinymce-jsonimagefolderlisting",
         renderer="json",
+        permission="edit",
         )
 
     config.add_view(
         jsondetails,
         name="tinymce-jsondetails",
         renderer="json",
+        permission="edit",
         )
 
     config.add_view(
         setDescription,
         name="tinymce-setDescription",
         renderer="json",
+        permission="edit",
         )
 
     config.add_view(
         upload,
         name="tinymce-upload",
         renderer="json",
+        permission="edit",
         )
 
     config.add_route(
@@ -156,6 +160,7 @@ def includeme(config):
         plonebrowser,
         renderer="templates/plonebrowser.htm.pt",
         route_name="plonebrowser.htm",
+        permission="edit",
         )
 
     config.add_static_view(
@@ -191,6 +196,7 @@ def includeme(config):
     config.add_view(
         image_view,
         name="images",
-        context="kotti.resources.Image"
+        context="kotti.resources.Image",
+        permission="view",
         )
     register(RenderEditInHead, None, render_resource_links)
