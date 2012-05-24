@@ -1,7 +1,7 @@
-from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render
 
 from kotti.views.image import image_scales
+from kotti.views.image import ImageView
 from kotti.views.slots import register
 from kotti.views.slots import RenderEditInHead
 
@@ -58,7 +58,7 @@ def jsonimagefolderlisting(context, request):
 def jsondetails(context, request):
     scales = [{
         "size": size,
-        "value": "image/{0}".format(name),
+        "value": "@@images/image/{0}".format(name),
         "title": "{0}x{1}".format(*size),
         }
         for (name, size) in image_scales.items()
@@ -79,7 +79,8 @@ def jsondetails(context, request):
 
 
 def image_view(context, request):
-    return HTTPFound(location=request.url.replace("/@@images", ""))
+    return ImageView(context, request).image(
+        subpath=request.subpath[-1:])
 
 
 def includeme(config):
