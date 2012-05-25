@@ -8,6 +8,7 @@
   <script type="text/javascript" src="js/plonebrowser.js"></script>
   <link rel="stylesheet" type="text/css" href="css/plonebrowser.css" />
   <link rel="stylesheet" type="text/css" href="${request.static_url('kotti_tinymce:static/columns.css')}" />
+  <link rel="stylesheet" type="text/css" href="${request.static_url('kotti_tinymce:static/plonebrowser.css')}" />
 </head>
 <body id="plonebrowser">
   <div class="dialog-wrapper icons-on" id="content">
