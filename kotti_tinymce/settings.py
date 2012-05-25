@@ -1,5 +1,7 @@
 import json
 
+from pyramid.i18n import get_locale_name
+
 DEFAULT_SETTINGS = {
     u'allow_captioned_images': False,
     u'atd_ignore_strings': u'Zope,Plone,TinyMCE',
@@ -110,4 +112,6 @@ def replace_urls(value, request):
 
 def get_settings_json(request):
     settings = DEFAULT_SETTINGS.copy()
-    return replace_urls(json.dumps(settings), request)
+    settings['language'] = get_locale_name(request)
+    settings_json = json.dumps(settings)
+    return replace_urls(settings_json, request)
