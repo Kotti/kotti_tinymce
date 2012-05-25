@@ -25,5 +25,5 @@ setup(name='kotti_tinymce',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
-      install_requires=['Kotti'],
+      install_requires=['Kotti', 'pytest'],
       )

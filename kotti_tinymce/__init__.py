@@ -11,11 +11,17 @@ from kotti.views.image import ImageView
 from kotti.views.slots import register
 from kotti.views.slots import RenderEditInHead
 
+from kotti_tinymce.settings import get_settings_json
+
 TINYMCE_SRC = 'kotti_tinymce:Products.TinyMCE/Products/TinyMCE/skins/tinymce/'
 
 
 def render_resource_links(context, request):
     return render('kotti_tinymce:templates/resources.pt', {}, request)
+
+
+def settings(context, request):
+    return Response(get_settings_json(request))
 
 
 def kotti_configure(settings):
@@ -109,8 +115,8 @@ def jsondetails(context, request):
         "uid_relative_url": "resolveuid/6d4e5e43caf04d5abbab9adfe2dcca97",
         "thumb": thumb,
         "anchors": [],
-        "uid_url": request.resource_url(context).rstrip("/"),
-        "url": request.resource_url(context).rstrip("/"),
+        "uid_url": request.resource_url(context),
+        "url": request.resource_url(context),
         "title": context.title,
         "description": context.description,
         "scales": scales,
@@ -159,6 +165,12 @@ def upload(context, request):
 
 
 def includeme(config):
+
+    config.add_view(
+        settings,
+        name='tinymce-settings',
+        permission='edit',
+        )
 
     config.add_route(
         "source_editor.htm",
