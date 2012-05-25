@@ -3,6 +3,7 @@ from pyramid.location import lineage
 from pyramid.renderers import render
 from pyramid.response import Response
 
+from kotti.resources import File
 from kotti.resources import Image
 from kotti.util import title_to_name
 from kotti.views.image import image_scales
@@ -30,6 +31,28 @@ def plonebrowser(context, request):
         "getImageScales": ({"value": "thumb", "title": "Daumennagel"}, )
     }
 
+
+#def jsonlinkablefolderlisting(context, request):
+#    {
+#        "parent_url": "",
+#        "path": [{
+#            "url": "http://localhost:8080/Plone",
+#            "icon": "<img src=\"img/home.png\" width=\"16\" height=\"16\" />",
+#            "title": "Home"
+#        }],
+#        "upload_allowed": true,
+#        "items": [{
+#            "description": "Congratulations! You have successfully installed Plone.",
+#            "uid": "4a5fdcf683e8439483bd6ab9ea463f1a",
+#            "title": "Welcome to Plone",
+#            "url": "http://localhost:8080/Plone/front-page",
+#            "is_folderish": false,
+#            "portal_type": "Document",
+#            "icon": null,
+#            "id": "front-page",
+#            "normalized_type": "document"
+#        }]
+#    }
 
 def jsonimagefolderlisting(context, request):
 
@@ -77,9 +100,14 @@ def jsondetails(context, request):
         for (name, size) in image_scales.items()
         ]
 
+    if context.type == "image":
+        thumb = request.resource_url(context) + "image/span2"
+    else:
+        thumb = None
+
     info = {
         "uid_relative_url": "resolveuid/6d4e5e43caf04d5abbab9adfe2dcca97",
-        "thumb": request.resource_url(context) + "image/span2",
+        "thumb": thumb,
         "anchors": [],
         "uid_url": request.resource_url(context).rstrip("/"),
         "url": request.resource_url(context).rstrip("/"),
@@ -112,7 +140,11 @@ def upload(context, request):
     data = file.file.read()
     size = len(data)
 
-    image = context[title_to_name(title)] = Image(
+    if mimetype.startswith("image"):
+        Factory = Image
+    else:
+        Factory = File
+    image = context[title_to_name(title)] = Factory(
         title=title,
         description=description,
         data=data,
@@ -135,6 +167,13 @@ def includeme(config):
     config.add_view(
         renderer=TINYMCE_SRC + 'themes/advanced/source_editor.htm.pt',
         route_name="source_editor.htm",
+        permission="edit",
+        )
+
+    config.add_view(
+        jsonimagefolderlisting,
+        name="tinymce-jsonlinkablefolderlisting",
+        renderer="json",
         permission="edit",
         )
 
