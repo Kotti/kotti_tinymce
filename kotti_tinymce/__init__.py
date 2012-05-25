@@ -145,8 +145,8 @@ def upload(context, request):
         size=size
         )
     return Response("""<html><head></head><body onload="window.parent.uploadOk('%s', '%s');"></body></html>""" % (
-        request.resource_url(resource),
-        request.resource_url(context)
+        request.resource_url(resource).rstrip("/"),
+        request.resource_url(context).rstrip("/")
         ))
 
 
@@ -250,4 +250,5 @@ def includeme(config):
         context="kotti.resources.Image",
         permission="view",
         )
+
     register(RenderEditInHead, None, render_resource_links)
