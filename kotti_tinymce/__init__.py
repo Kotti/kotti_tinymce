@@ -38,28 +38,6 @@ def plonebrowser(context, request):
     }
 
 
-#def jsonlinkablefolderlisting(context, request):
-#    {
-#        "parent_url": "",
-#        "path": [{
-#            "url": "http://localhost:8080/Plone",
-#            "icon": "<img src=\"img/home.png\" width=\"16\" height=\"16\" />",
-#            "title": "Home"
-#        }],
-#        "upload_allowed": true,
-#        "items": [{
-#            "description": "Congratulations! You have successfully installed Plone.",
-#            "uid": "4a5fdcf683e8439483bd6ab9ea463f1a",
-#            "title": "Welcome to Plone",
-#            "url": "http://localhost:8080/Plone/front-page",
-#            "is_folderish": false,
-#            "portal_type": "Document",
-#            "icon": null,
-#            "id": "front-page",
-#            "normalized_type": "document"
-#        }]
-#    }
-
 def jsonimagefolderlisting(context, request):
 
     items = [
@@ -101,9 +79,9 @@ def jsondetails(context, request):
     scales = [{
         "size": size,
         "value": "@@images/image/{0}".format(name),
-        "title": "{0}x{1}".format(*size),
+        "title": name,
         }
-        for (name, size) in image_scales.items()
+        for (name, size) in sorted(image_scales.items(), key=lambda x: x[1])
         ]
 
     if context.type == "image":
@@ -141,16 +119,24 @@ def upload(context, request):
     title = request.POST["uploadtitle"]
     description = request.POST["uploaddescription"]
     file = request.POST["uploadfile"]
+
+    if not hasattr(file, "filename"):
+        return Response("""<html><head></head><body onload="window.parent.uploadError('%s');"></body></html>""" % (
+            "Y U NO FILE???",
+        ))
+
     mimetype = file.type
     filename = file.filename
     data = file.file.read()
     size = len(data)
+    title = title or filename
 
     if mimetype.startswith("image"):
         Factory = Image
     else:
         Factory = File
-    image = context[title_to_name(title)] = Factory(
+
+    resource = context[title_to_name(title, blacklist=context.keys())] = Factory(
         title=title,
         description=description,
         data=data,
@@ -159,7 +145,7 @@ def upload(context, request):
         size=size
         )
     return Response("""<html><head></head><body onload="window.parent.uploadOk('%s', '%s');"></body></html>""" % (
-        request.resource_url(image),
+        request.resource_url(resource),
         request.resource_url(context)
         ))
 
