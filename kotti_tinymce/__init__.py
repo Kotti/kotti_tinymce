@@ -34,7 +34,8 @@ def plonebrowser(context, request):
 def jsonimagefolderlisting(context, request):
 
     items = [
-        {'description': 'Site News',
+        {
+            'description': item.description,
             'icon': None,
             'id': item.name,
             'is_folderish': item.type not in ("file", "image", ),
@@ -42,7 +43,8 @@ def jsonimagefolderlisting(context, request):
             'portal_type': item.type_info.title,
             'title': item.title,
             'uid': str(item.id),
-            'url': request.resource_url(item)} for item in context.values()
+            'url': request.resource_url(item),
+        } for item in context.values()
     ]
     if context.__parent__ is None:
         parent_url = ""
@@ -56,12 +58,14 @@ def jsonimagefolderlisting(context, request):
 
     upload_allowed = True
 
-    return {
+    listing = {
         "items": items,
         "parent_url": parent_url,
         "path": path,
         "upload_allowed": upload_allowed,
     }
+
+    return listing
 
 
 def jsondetails(context, request):
@@ -75,15 +79,14 @@ def jsondetails(context, request):
 
     info = {
         "uid_relative_url": "resolveuid/6d4e5e43caf04d5abbab9adfe2dcca97",
-        "thumb": request.resource_url(context) + "/image/span2",
+        "thumb": request.resource_url(context) + "image/span2",
         "anchors": [],
-        "uid_url": request.resource_url(context),
-        "url": request.resource_url(context),
+        "uid_url": request.resource_url(context).rstrip("/"),
+        "url": request.resource_url(context).rstrip("/"),
         "title": context.title,
         "description": context.description,
         "scales": scales,
         }
-
     return info
 
 
@@ -124,6 +127,17 @@ def upload(context, request):
 
 
 def includeme(config):
+
+    config.add_route(
+        "source_editor.htm",
+        '/static-kotti-tinymce-skins/themes/advanced/source_editor.htm',
+        )
+    config.add_view(
+        renderer=TINYMCE_SRC + 'themes/advanced/source_editor.htm.pt',
+        route_name="source_editor.htm",
+        permission="edit",
+        )
+
     config.add_view(
         jsonimagefolderlisting,
         name="tinymce-jsonimagefolderlisting",
