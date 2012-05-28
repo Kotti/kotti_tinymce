@@ -113,5 +113,5 @@ def replace_urls(value, request):
 def get_settings_json(request):
     settings = DEFAULT_SETTINGS.copy()
     settings['language'] = get_locale_name(request)
-    settings_json = json.dumps(settings)
+    settings_json = json.dumps(settings, sort_keys=True, indent=4)
     return replace_urls(settings_json, request)
