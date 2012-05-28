@@ -15,7 +15,7 @@ jQuery(function($) {
         },
         ${api.render_view('tinymce-settings')}
         );
-    $('textarea.mce_editable').tinymce(conf);
+    $('textarea.tinymce').tinymce(conf);
 });
 -->
 </script>
