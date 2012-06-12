@@ -18,8 +18,12 @@
             </div>
         </div>
         <div class="row-fluid">
-            <form id="kottibrowser_form">
-                <div class="span4">
+            <form id="kottibrowser_form"
+                  method="POST"
+                  enctype="multipart/form-data"
+                  accept-charset="utf-8">
+                <div class="span4 well">
+                    <h3>Navigation</h3>
                     <ul class="nav nav-pills nav-stacked">
                         <li tal:condition="request.resource_url(context).rstrip('/') != request.application_url.rstrip('/')">
                             <a href="${request.resource_url(context)}../@@kottibrowser">
@@ -39,25 +43,52 @@
                         </tal:block>
                     </ul>
                 </div>
-                <div class="span8" tal:condition="link_selectable">
-                    <input type="text" name="url" id="url" value="${request.resource_url(context)}" /><br />
-                    <input type="button" value="Insert Link" onClick="kottibrowserdialog.submit();" />
-                </div>
-                <div class="span8" tal:condition="image_selectable">
-                    <img id="kottibrowser_image_preview" src="${request.resource_url(context)}image/span1" />
-                    <hr />
-                    <script>
-                        var image_url = '${image_url}';
-                    </script>
-                    <label for="url">Image URL</label>
-                    <input class="span12" type="text" name="url" id="url" value="${request.resource_url(context)}image" />
-                    <label for="image_scale">Image Scale</label>
-                    <select class="span12" name="image_scale">
-                        <option tal:repeat="image_scale image_scales" value="${image_scale.value}">
-                            ${image_scale.title}
-                        </option>
-                    </select>
-                    <input type="button" value="Insert Image" onClick="kottibrowserdialog.submit();" />
+                <div class="span8 well">
+                    <div class="alert alert-success"
+                         tal:define="messages request.session.pop_flash('success')"
+                         tal:condition="messages"
+                         tal:repeat="message messages">
+                      ${message}
+                    </div>
+                    <div tal:condition="link_selectable">
+                        <h3>Selection</h3>
+                        <input type="text" name="url" id="url" value="${request.resource_url(context)}" /><br />
+                        <input class="btn btn-primary" type="button" value="Insert Link" onClick="kottibrowserdialog.submit();" />
+                    </div>
+                    <div tal:condition="image_selectable">
+                        <h3>Selection</h3>
+                        <img id="kottibrowser_image_preview" src="${request.resource_url(context)}image/span1" />
+                        <hr />
+                        <script>
+                            var image_url = '${image_url}';
+                        </script>
+                        <label for="url">Image URL</label>
+                        <input class="span12" type="text" name="url" id="url" value="${request.resource_url(context)}image" />
+                        <label for="image_scale">Image Scale</label>
+                        <select class="span12" name="image_scale">
+                            <option tal:repeat="image_scale image_scales" value="${image_scale.value}">
+                                ${image_scale.title}
+                            </option>
+                        </select>
+                        <input class="btn btn-primary" type="button" value="Insert Image" onClick="kottibrowserdialog.submit();" />
+                    </div>
+                    <div tal:condition="upload_allowed">
+                        <hr tal:condition="link_selectable or image_selectable" />
+                        <h3>Upload</h3>
+                        <div class="alert alert-error"
+                             tal:define="messages request.session.pop_flash('error')"
+                             tal:condition="messages"
+                             tal:repeat="message messages">
+                          ${message}
+                        </div>
+                        <label for="uploadtitle">Title</label>
+                        <input class="span12" type="text" name="uploadtitle" />
+                        <label for="uploaddescription">Description</label>
+                        <textarea class="span12" name="uploaddescription"></textarea>
+                        <label for="uploadfile">File</label>
+                        <input class="span12" type="file" name="uploadfile" />
+                        <input class="btn btn-primary" type="submit" name="upload" value="Upload" />
+                    </div>
                 </div>
             </form>
         </div>

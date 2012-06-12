@@ -27,7 +27,7 @@ setup(name='kotti_tinymce',
       zip_safe=False,
       install_requires=[
         'js.tinymce<4.0-dev',  # TinyMCE 4.x will likely have an incompatible plugin API
-        'Kotti>=0.7-dev',
+        'Kotti>=0.7-dev',  # Kotti with fanstatic is required
         'pytest', ],
       entry_points="""\
       [fanstatic.libraries]
