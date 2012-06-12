@@ -34,15 +34,15 @@ DEFAULT_SETTINGS = {
                  u''],
     u'content_css': u'${application_url}/static-kotti-tinymce/content.css',
     u'contextmenu': True,
-    u'customplugins': [u'plonebrowser'],
+    u'customplugins': [u'kottibrowser'],
     u'directionality': u'ltr',
     u'document_base_url': u'${base_url}',
     u'document_url': u'${context_url}',
     u'entity_encoding': u'raw',
     u'fix_list_elements': False,
     u'gecko_spellcheck': True,
-    u'image_shortcuts_html': [u'\n        <img src="img/home.png" />\n        <a id="home" href="${application_url}">Home</a>\n        ',
-                              u'\n        <img src="img/folder_current.png" />\n        <a id="currentfolder" href="${context_url}">Current Folder</a>\n        '],
+    u'image_shortcuts_html': [u'\n<img src="img/home.png" />\n<a id="home" href="${application_url}">Home</a>\n',
+                              u'\n<img src="img/folder_current.png" />\n<a id="currentfolder" href="${context_url}">Current Folder</a>\n'],
     u'inlinepopups_skin': u'plonepopup',
     u'labels': {u'label_addnewfile': u'Add new File',
                 u'label_addnewimage': u'Add new Image',
@@ -64,8 +64,8 @@ DEFAULT_SETTINGS = {
                 u'label_tables': u'Tables',
                 u'label_text': u'Text'},
     u'language': u'en',
-    u'link_shortcuts_html': [u'\n        <img src="img/home.png" />\n        <a id="home" href="${application_url}">Home</a>\n        ',
-                             u'\n        <img src="img/folder_current.png" />\n        <a id="currentfolder" href="${context_url}">Current Folder</a>\n        '],
+    u'link_shortcuts_html': [u'\n<img src="img/home.png" />\n<a id="home" href="${application_url}">Home</a>\n',
+                             u'\n<img src="img/folder_current.png" />\n<a id="currentfolder" href="${context_url}">Current Folder</a>\n'],
     u'link_using_uids': False,
     u'livesearch': True,
     u'media_strict': False,
@@ -100,15 +100,17 @@ DEFAULT_SETTINGS = {
     u'valid_inline_styles': u'text-align,list-style-type,float,padding-left',
     }
 
+
 def replace_urls(value, request):
     base_url = context_url = request.resource_url(request.context).rstrip('/')
     application_url = request.application_url
     if context_url != application_url:
-        base_url = base_url + '/' 
+        base_url = base_url + '/'
     value = value.replace("${application_url}", application_url)
     value = value.replace("${context_url}", context_url)
     value = value.replace("${base_url}", base_url)
     return value
+
 
 def get_settings_json(request):
     settings = DEFAULT_SETTINGS.copy()
