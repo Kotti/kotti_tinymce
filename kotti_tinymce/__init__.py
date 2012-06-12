@@ -5,8 +5,12 @@ from fanstatic import Library
 from fanstatic import Resource
 from js.tinymce import tinymce
 from js.tinymce import tinymcepopup
+from kotti.resources import File
+from kotti.resources import Image
 from kotti.static import edit_needed
+from kotti.util import title_to_name
 from kotti.views.image import image_scales
+from pyramid.httpexceptions import HTTPFound
 from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.view import view_defaults
@@ -14,11 +18,12 @@ from pyramid.view import view_defaults
 library = Library('kotti_tinymce', 'static')
 kotti_tinymce = Resource(library,
                          "kotti_tinymce.js",
-#                         minified="kotti_tinymce.min.js",
+                         minified="kotti_tinymce.min.js",
                          depends=[tinymce, tinymcepopup])
 
 
-@view_defaults(context=object)
+@view_defaults(context=object,
+               request_method="GET")
 class KottiTinyMCE():
 
     def __init__(self, context, request):
@@ -80,7 +85,53 @@ class KottiTinyMCE():
             "link_selectable": self.request.session["kottibrowser_requested_type"] != "image",
             "image_url": self.request.resource_url(self.context) + 'image',
             "image_scales": scales,
+            # TODO: upload_allowed needs a better check.
+            "upload_allowed": self.context.type == 'document',
         }
+
+    @view_config(name="kottibrowser",
+                 renderer="kotti_tinymce:templates/kottibrowser.pt",
+                 request_method="POST")
+    def upload(self):
+
+        title = self.request.POST["uploadtitle"]
+        description = self.request.POST["uploaddescription"]
+
+        if "uploadfile" not in self.request.POST:
+            self.request.session.flash("Please select a file to upload.", "error")
+            return self.kottibrowser()
+        file = self.request.POST["uploadfile"]
+
+        if not hasattr(file, "filename"):
+            self.request.session.flash("Please select a file to upload.", "error")
+            return self.kottibrowser()
+
+        mimetype = file.type
+        filename = file.filename
+        data = file.file.read()
+        size = len(data)
+        title = title or filename
+
+        if mimetype.startswith("image"):
+            Factory = Image
+        else:
+            Factory = File
+
+        id = title_to_name(title, blacklist=self.context.keys())
+        resource = self.context[id] = Factory(
+            title=title,
+            description=description,
+            data=data,
+            filename=filename,
+            mimetype=mimetype,
+            size=size
+            )
+
+        self.request.session.flash("Successfully uploaded.", "success")
+
+        location = self.request.resource_url(resource, "@@kottibrowser")
+
+        return HTTPFound(location=location)
 
 
 def kotti_configure(settings):
