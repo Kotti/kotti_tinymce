@@ -7,7 +7,6 @@ from js.tinymce import tinymce
 from js.tinymce import tinymcepopup
 from kotti.static import edit_needed
 from kotti.views.image import image_scales
-from kotti_navigation import render_navigation_widget
 from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.view import view_defaults
@@ -79,7 +78,6 @@ class KottiTinyMCE():
         return {
             "image_selectable": self.context.type == self.request.session["kottibrowser_requested_type"] == "image",
             "link_selectable": self.request.session["kottibrowser_requested_type"] != "image",
-            "navigation": render_navigation_widget(self.context, self.request),
             "image_url": self.request.resource_url(self.context) + 'image',
             "image_scales": scales,
         }

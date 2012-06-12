@@ -12,7 +12,7 @@
     <body class="${request.user is not None and 'logged-in'}
                  view-${request.view_name or 'default'}
                  ${api.body_css_class}">
-        <div class="row">
+        <div class="row-fluid">
             <div class="span12">
                 <h1>
                     Kotti Browser
@@ -20,18 +20,20 @@
                 </h1>
             </div>
         </div>
-        <div class="row">
+        <div class="row-fluid">
             <div class="span12">
                 <div tal:replace="api.render_template('kotti:templates/edit/breadcrumbs.pt')" />
             </div>
         </div>
-        <div class="row">
+        <div class="row-fluid">
             <form id="kottibrowser_form">
                 <div class="span4">
-                    <ul>
-                        <li tal:repeat="child context.children">
-                            <a href="${request.resource_url(child)}@@kottibrowser">${child.title}</a>
-                        </li>
+                    <ul class="nav nav-pills nav-stacked">
+                        <tal:block tal:repeat="child context.children or context.parent.children">
+                            <li class="${child == context and 'active' or ''}">
+                                <a href="${request.resource_url(child)}@@kottibrowser">${child.title}</a>
+                            </li>
+                        </tal:block>
                     </ul>
                 </div>
                 <div class="span8" tal:condition="link_selectable">
