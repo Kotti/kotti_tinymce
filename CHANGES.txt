@@ -1,6 +1,13 @@
 ChangeLog
 =========
 
+0.2
+---
+
+- get rid of Products.TinyMCE
+- use fanstatic
+- add custom 'kottibrowser' TinyMCE plugin
+
 0.1 - Unreleased
 ----------------
 
