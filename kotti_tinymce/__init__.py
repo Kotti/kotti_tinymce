@@ -5,9 +5,6 @@ from fanstatic import Library
 from fanstatic import Resource
 from js.tinymce import tinymce
 from js.tinymce import tinymcepopup
-from kotti import DBSession
-from kotti.resources import Image
-from kotti.resources import Node
 from kotti.static import edit_needed
 from kotti.views.image import image_scales
 from kotti_navigation import render_navigation_widget

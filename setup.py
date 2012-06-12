@@ -6,7 +6,7 @@ README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 setup(name='kotti_tinymce',
-      version='0.1',
+      version='0.2',
       description="TinyMCE plugins for Kotti",
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
@@ -25,7 +25,10 @@ setup(name='kotti_tinymce',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
-      install_requires=['Kotti>=0.7-dev', 'pytest'],
+      install_requires=[
+        'js.tinymce<4.0-dev',  # TinyMCE 4.x will likely have an incompatible plugin API
+        'Kotti>=0.7-dev',
+        'pytest', ],
       entry_points="""\
       [fanstatic.libraries]
       tinymce = kotti_tinymce:library
