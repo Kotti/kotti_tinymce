@@ -25,5 +25,9 @@ setup(name='kotti_tinymce',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
-      install_requires=['Kotti', 'pytest'],
+      install_requires=['Kotti>=0.7-dev', 'pytest'],
+      entry_points="""\
+      [fanstatic.libraries]
+      tinymce = kotti_tinymce:library
+      """,
       )

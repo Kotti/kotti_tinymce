@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml" metal:define-macro="main">
+    <head>
+        <meta charset="utf-8" />
+        <title>Kotti Browser</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+            <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="shortcut icon" href="${request.static_url('kotti:static/favicon.ico')}" />
+    </head>
+    <body class="${request.user is not None and 'logged-in'}
+                 view-${request.view_name or 'default'}
+                 ${api.body_css_class}">
+        <div class="row">
+            <div class="span12">
+                <h1>
+                    Kotti Browser
+                    (${request.session["kottibrowser_requested_type"]})
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <div tal:replace="api.render_template('kotti:templates/edit/breadcrumbs.pt')" />
+            </div>
+        </div>
+        <div class="row">
+            <form id="kottibrowser_form">
+                <div class="span4">
+                    <ul>
+                        <li tal:repeat="child context.children">
+                            <a href="${request.resource_url(child)}@@kottibrowser">${child.title}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="span8" tal:condition="link_selectable">
+                    <input type="text" name="url" id="url" value="${request.resource_url(context)}" /><br />
+                    <input type="button" value="Insert Link" onClick="kottibrowserdialog.submit();" />
+                </div>
+                <div class="span4" tal:condition="image_selectable">
+                    <script>
+                        var image_url = '${image_url}';
+                    </script>
+                    <input type="text" name="url" id="url" value="${request.resource_url(context)}image" /><br />
+                    Image Scale:<br />
+                    <select name="image_scale">
+                        <option tal:repeat="image_scale image_scales" value="${image_scale.value}">
+                            ${image_scale.title}
+                        </option>
+                    </select>
+                    <input type="button" value="Insert Image" onClick="kottibrowserdialog.submit();" />
+                </div>
+                <div class="span4" tal:condition="image_selectable">
+                    <img id="kottibrowser_image_preview" src="${request.resource_url(context)}image/span1" />
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

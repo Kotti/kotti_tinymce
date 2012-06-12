@@ -12,6 +12,7 @@ class TestBase(UnitTestBase):
         self.root = get_root()
         self.page = self.root['about'] = Content()
 
+
 class GetSettings(TestBase):
     def call(self, context):
         from kotti_tinymce.settings import get_settings_json
