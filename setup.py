@@ -6,7 +6,7 @@ README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 setup(name='kotti_tinymce',
-      version='0.2',
+      version='0.3-dev',
       description="TinyMCE plugins for Kotti",
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
@@ -17,9 +17,9 @@ setup(name='kotti_tinymce',
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
         "License :: OSI Approved :: MIT License",
         ],
-      author='',
-      author_email='',
-      url='http://pypi.python.org/pypi/kotti_tinymce',
+      author='Andreas Kaiser',
+      author_email='disko@binary-punks.com',
+      url='https://github.com/disko/kotti_tinymce',
       keywords='tinymce image browser kotti cms pylons pyramid',
       license="MIT",
       packages=find_packages(),

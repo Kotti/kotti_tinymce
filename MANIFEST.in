@@ -1,0 +1,4 @@
+include README.rst
+include CHANGES.txt
+recursive-include kotti_tinymce/templates *.pt
+recursive-include kotti_tinymce/static *.js
