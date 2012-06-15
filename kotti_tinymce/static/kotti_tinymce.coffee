@@ -2,24 +2,24 @@
 
 window.kottibrowser = (field_name, url, type, win) ->
 
-  console.log "field_name: #{field_name}"
-  console.log "url: #{url}"
-  console.log "type: #{type}"
-  console.log "win: #{win}"
+  # console.log "field_name: #{field_name}"
+  # console.log "url: #{url}"
+  # console.log "type: #{type}"
+  # console.log "win: #{win}"
 
   kotti_url = window.location.toString()
-  console.log "kotti_url: #{kotti_url}"
+  # console.log "kotti_url: #{kotti_url}"
 
   kotti_url = kotti_url.replace /@@edit/, "@@kottibrowser"
   kotti_url = kotti_url.replace /add_document/, "@@kottibrowser"
-  console.log "kotti_url: #{kotti_url}"
+  # console.log "kotti_url: #{kotti_url}"
 
   if kotti_url.indexOf("?") < 0
     kotti_url = kotti_url + "?type=" + type
   else
     kotti_url = kotti_url + "&type=" + type
 
-  console.log "kotti_url: #{kotti_url}"
+  # console.log "kotti_url: #{kotti_url}"
 
   tinyMCE.activeEditor.windowManager.open
     file: kotti_url
@@ -39,7 +39,7 @@ window.kottibrowser = (field_name, url, type, win) ->
 window.kottibrowserdialog =
 
   init: ->
-    console.log "kottibrowserdialog.init"
+    # console.log "kottibrowserdialog.init"
     $("select[name=image_scale]").change ->
       image_scale_url = "#{image_url}/#{$(this).val()}"
       $("#kottibrowser_image_preview").attr("src", image_scale_url)
