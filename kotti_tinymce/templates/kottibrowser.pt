@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" metal:define-macro="main">
+<html xmlns="http://www.w3.org/1999/xhtml" metal:define-macro="main" tal:define="dummy api.edit_needed">
     <head>
         <meta charset="utf-8" />
         <title>Kotti Browser</title>

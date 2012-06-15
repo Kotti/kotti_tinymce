@@ -1,6 +1,12 @@
 ChangeLog
 =========
 
+0.2.1
+-----
+
+- kotti_tinymce is a direct dependency of Kotti now
+- use Kotti's "new style" edit_needed
+
 0.2
 ---
 
