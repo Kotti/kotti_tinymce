@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+0.2.2
+-----
+
+- fix requirement version conflict (now: Kotti>=0.7dev)
+
 0.2.1
 -----
 
