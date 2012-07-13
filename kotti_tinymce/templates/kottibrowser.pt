@@ -1,4 +1,11 @@
-<html xmlns="http://www.w3.org/1999/xhtml" metal:define-macro="main" tal:define="dummy api.edit_needed">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:define-macro="main"
+      tal:define="dummy api.edit_needed"
+      i18n:domain="kotti_tinymce"
+      >
     <head>
         <meta charset="utf-8" />
         <title>Kotti Browser</title>
@@ -23,7 +30,7 @@
                   enctype="multipart/form-data"
                   accept-charset="utf-8">
                 <div class="span4 well">
-                    <h3>Navigation</h3>
+                    <h3 i18n:translate="">Navigation</h3>
                     <ul class="nav nav-pills nav-stacked">
                         <li tal:condition="request.resource_url(context).rstrip('/') != request.application_url.rstrip('/')">
                             <a href="${request.resource_url(context)}../@@kottibrowser">
@@ -51,20 +58,20 @@
                       ${message}
                     </div>
                     <div tal:condition="link_selectable">
-                        <h3>Selection</h3>
+                        <h3 i18n:translate="">Selection</h3>
                         <input type="text" name="url" id="url" value="${request.resource_url(context)}" /><br />
                         <input class="btn btn-primary" type="button" value="Insert Link" onClick="kottibrowserdialog.submit();" />
                     </div>
                     <div tal:condition="image_selectable">
-                        <h3>Selection</h3>
+                        <h3 i18n:translate="">Selection</h3>
                         <img id="kottibrowser_image_preview" src="${request.resource_url(context)}image/span1" />
                         <hr />
                         <script>
                             var image_url = '${image_url}';
                         </script>
-                        <label for="url">Image URL</label>
+                        <label for="url" i18n:translate="">Image URL</label>
                         <input class="span12" type="text" name="url" id="url" value="${request.resource_url(context)}image" />
-                        <label for="image_scale">Image Scale</label>
+                        <label for="image_scale" i18n:translate="">Image Scale</label>
                         <select class="span12" name="image_scale">
                             <option tal:repeat="image_scale image_scales" value="${image_scale.value}">
                                 ${image_scale.title}
@@ -74,20 +81,20 @@
                     </div>
                     <div tal:condition="upload_allowed">
                         <hr tal:condition="link_selectable or image_selectable" />
-                        <h3>Upload</h3>
+                        <h3 i18n:translate="">Upload</h3>
                         <div class="alert alert-error"
                              tal:define="messages request.session.pop_flash('error')"
                              tal:condition="messages"
                              tal:repeat="message messages">
                           ${message}
                         </div>
-                        <label for="uploadtitle">Title</label>
+                        <label for="uploadtitle" i18n:translate="">Title</label>
                         <input class="span12" type="text" name="uploadtitle" />
-                        <label for="uploaddescription">Description</label>
+                        <label for="uploaddescription" i18n:translate="">Description</label>
                         <textarea class="span12" name="uploaddescription"></textarea>
-                        <label for="uploadfile">File</label>
+                        <label for="uploadfile" i18n:translate="">File</label>
                         <input class="span12" type="file" name="uploadfile" />
-                        <input class="btn btn-primary" type="submit" name="upload" value="Upload" />
+                        <input class="btn btn-primary" type="submit" name="upload" i18n:attributes="value" value="Upload" />
                     </div>
                 </div>
             </form>
