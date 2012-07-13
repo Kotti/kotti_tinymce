@@ -14,6 +14,7 @@ from pyramid.httpexceptions import HTTPFound
 from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.view import view_defaults
+from kotti.util import _
 
 library = Library('kotti_tinymce', 'static')
 kotti_tinymce = Resource(library,
@@ -98,12 +99,12 @@ class KottiTinyMCE():
         description = self.request.POST["uploaddescription"]
 
         if "uploadfile" not in self.request.POST:
-            self.request.session.flash("Please select a file to upload.", "error")
+            self.request.session.flash(_("Please select a file to upload."), "error")
             return self.kottibrowser()
         file = self.request.POST["uploadfile"]
 
         if not hasattr(file, "filename"):
-            self.request.session.flash("Please select a file to upload.", "error")
+            self.request.session.flash(_("Please select a file to upload."), "error")
             return self.kottibrowser()
 
         mimetype = file.type
@@ -127,7 +128,7 @@ class KottiTinyMCE():
             size=size
             )
 
-        self.request.session.flash("Successfully uploaded.", "success")
+        self.request.session.flash(_("Successfully uploaded."), "success")
 
         location = self.request.resource_url(resource, "@@kottibrowser")
 
@@ -142,7 +143,6 @@ def kotti_configure(settings):
 
 
 def includeme(config):
-
     edit_needed.add(kotti_tinymce)
-
     config.scan("kotti_tinymce")
+    config.add_translation_dirs('kotti_tinymce:locale/')
