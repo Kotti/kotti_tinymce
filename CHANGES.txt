@@ -5,6 +5,7 @@ ChangeLog
 -----
 
 - added German translation
+- use TinyMCE's translations
 
 0.2.2
 -----
