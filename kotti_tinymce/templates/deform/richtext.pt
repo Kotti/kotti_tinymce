@@ -1,7 +1,9 @@
+<div xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     xmlns:tal="http://xml.zope.org/namespaces/tal"
+     tal:omit-tag="">
 <textarea id="${field.oid}" name="${field.name}" class='tinymce' tal:content="structure cstruct" />
 <span id="${field.oid}-preload" class="tinymce-preload" tal:content="structure cstruct" />
-<script language="javascript"
-    type="text/javascript">
+<script language="javascript" type="text/javascript">
     (function($){
 
         deform.addCallback(
@@ -34,7 +36,8 @@
                         table_col_limit : 5,
                         external_image_list_url : 'external_image_list',
                         external_link_list_url : 'external_link_list',
-                        file_browser_callback : 'kottibrowser'
+                        file_browser_callback : 'kottibrowser',
+                        language: '<tal:block i18n:domain="deform" i18n:translate="language-code">en</tal:block>'
                     });
                     jqoid_preload.unbind('click');
                 });
@@ -47,3 +50,4 @@
         });
     })(jQuery);
 </script>
+</div>

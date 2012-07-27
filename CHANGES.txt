@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+0.2.3
+-----
+
+- added German translation
+
 0.2.2
 -----
 
