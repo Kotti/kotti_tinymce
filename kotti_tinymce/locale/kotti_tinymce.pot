@@ -59,8 +59,3 @@ msgstr ""
 #: kotti_tinymce/templates/kottibrowser.pt:95
 msgid "File"
 msgstr ""
-
-#: kotti_tinymce/templates/deform/richtext.pt:41
-msgid "en"
-msgstr ""
-
