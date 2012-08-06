@@ -1,6 +1,12 @@
 ChangeLog
 =========
 
+0.2.4
+-----
+
+- Explicitly set relative_urls to false on TinyMCE initialization.
+  This fixes a bug when trying to add an image while adding a page.
+
 0.2.3
 -----
 

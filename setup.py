@@ -6,7 +6,7 @@ README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 setup(name='kotti_tinymce',
-      version='0.2.3',
+      version='0.2.4.dev',
       description="TinyMCE plugins for Kotti",
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
