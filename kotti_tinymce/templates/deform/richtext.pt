@@ -34,6 +34,7 @@
                         table_cell_limit : 100,
                         table_row_limit : 5,
                         table_col_limit : 5,
+                        relative_urls: false,
                         external_image_list_url : 'external_image_list',
                         external_link_list_url : 'external_link_list',
                         file_browser_callback : 'kottibrowser',
