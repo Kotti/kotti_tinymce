@@ -20,7 +20,7 @@ library = Library('kotti_tinymce', 'static')
 kotti_tinymce = Resource(library,
                          "kotti_tinymce.js",
                          minified="kotti_tinymce.min.js",
-                         depends=[tinymce, tinymcepopup])
+                         depends=[tinymce, ])
 
 
 @view_defaults(context=object,
@@ -74,6 +74,8 @@ class KottiTinyMCE():
     @view_config(name="kottibrowser",
                  renderer="kotti_tinymce:templates/kottibrowser.pt")
     def kottibrowser(self):
+
+        tinymcepopup.need()
 
         scales = [{
             "size": size,

@@ -53,6 +53,4 @@
     }
   };
 
-  tinyMCEPopup.onInit.add(kottibrowserdialog.init, kottibrowserdialog);
-
 }).call(this);
