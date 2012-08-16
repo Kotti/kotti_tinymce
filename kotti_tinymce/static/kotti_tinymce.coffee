@@ -53,5 +53,3 @@ window.kottibrowserdialog =
       win.ImageDialog.getImageData()  if win.ImageDialog.getImageData
       win.ImageDialog.showPreviewImage url  if win.ImageDialog.showPreviewImage
     tinyMCEPopup.close()
-
-tinyMCEPopup.onInit.add(kottibrowserdialog.init, kottibrowserdialog);
