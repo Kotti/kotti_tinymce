@@ -1,8 +1,11 @@
 ChangeLog
 =========
 
-0.2.5dev
---------
+0.2.5
+-----
+
+- Fix JS errors caused by calling tinyMCEPopup.onInit.add from a
+  wrong place.
 
 0.2.4
 -----
