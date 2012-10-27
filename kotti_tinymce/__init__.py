@@ -7,7 +7,10 @@ from js.tinymce import tinymce
 from js.tinymce import tinymcepopup
 from kotti.resources import File
 from kotti.resources import Image
-from kotti.static import edit_needed
+try:
+    from kotti.fanstatic import edit_needed
+except ImportError:
+    from kotti.static import edit_needed
 from kotti.util import title_to_name
 from kotti.views.image import image_scales
 from pyramid.httpexceptions import HTTPFound
