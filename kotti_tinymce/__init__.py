@@ -1,23 +1,20 @@
 # -*- coding: utf-8 -*-
 
 import json
+
 from fanstatic import Library
 from fanstatic import Resource
 from js.tinymce import tinymce
 from js.tinymce import tinymcepopup
 from kotti.resources import File
 from kotti.resources import Image
-try:
-    from kotti.fanstatic import edit_needed
-except ImportError:
-    from kotti.static import edit_needed
+from kotti.util import _
 from kotti.util import title_to_name
 from kotti.views.image import image_scales
 from pyramid.httpexceptions import HTTPFound
 from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.view import view_defaults
-from kotti.util import _
 
 library = Library('kotti_tinymce', 'static')
 kotti_tinymce = Resource(library,
@@ -148,6 +145,13 @@ def kotti_configure(settings):
 
 
 def includeme(config):
-    edit_needed.add(kotti_tinymce)
     config.scan("kotti_tinymce")
     config.add_translation_dirs('kotti_tinymce:locale/')
+    try:
+        # kotti >= 0.8
+        from js.deform import resource_mapping
+        edit_needed = resource_mapping['tinymce'].append(kotti_tinymce)
+    except ImportError:
+        # kotti < 0.8
+        from kotti.static import edit_needed
+        edit_needed.add(kotti_tinymce)

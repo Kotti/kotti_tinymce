@@ -1,8 +1,11 @@
 ChangeLog
 =========
 
-0.2.6
------
+0.3
+---
+
+- Support js.deform (available with Kotti >= 0.8) to only include
+  the JS when rendering a RichTextWidget.
 
 0.2.5
 -----
