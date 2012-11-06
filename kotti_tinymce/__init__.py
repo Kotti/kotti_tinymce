@@ -76,6 +76,7 @@ class KottiTinyMCE():
     def kottibrowser(self):
 
         tinymcepopup.need()
+        kotti_tinymce.need()
 
         scales = [{
             "size": size,
