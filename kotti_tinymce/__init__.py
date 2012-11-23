@@ -6,6 +6,7 @@ from fanstatic import Library
 from fanstatic import Resource
 from js.tinymce import tinymce
 from js.tinymce import tinymcepopup
+from kotti.resources import Content
 from kotti.resources import File
 from kotti.resources import Image
 from kotti.util import _
@@ -23,7 +24,7 @@ kotti_tinymce = Resource(library,
                          depends=[tinymce, ])
 
 
-@view_defaults(context=object,
+@view_defaults(context=Content,
                request_method="GET")
 class KottiTinyMCE():
 
@@ -38,7 +39,8 @@ class KottiTinyMCE():
         if "type" in request.GET:
             request.session["kottibrowser_requested_type"] = request.GET["type"]
         else:
-            if ("kottibrowser_requested_type" not in request.session) or (not request.session["kottibrowser_requested_type"]):
+            if ("kottibrowser_requested_type" not in request.session) or \
+               (not request.session["kottibrowser_requested_type"]):
                 request.session["kottibrowser_requested_type"] = "file"
 
     @view_config(name="external_link_list")
@@ -102,12 +104,18 @@ class KottiTinyMCE():
         description = self.request.POST["uploaddescription"]
 
         if "uploadfile" not in self.request.POST:
-            self.request.session.flash(_("Please select a file to upload."), "error")
+            self.request.session.flash(
+                _("Please select a file to upload."),
+                "error"
+            )
             return self.kottibrowser()
         file = self.request.POST["uploadfile"]
 
         if not hasattr(file, "filename"):
-            self.request.session.flash(_("Please select a file to upload."), "error")
+            self.request.session.flash(
+                _("Please select a file to upload."),
+                "error"
+            )
             return self.kottibrowser()
 
         mimetype = file.type
@@ -152,7 +160,7 @@ def includeme(config):
         # kotti >= 0.8
         from js.deform import resource_mapping
         edit_needed = resource_mapping['tinymce'].append(kotti_tinymce)
-    except ImportError:
+    except ImportError:  # pragma: no cover
         # kotti < 0.8
         from kotti.static import edit_needed
         edit_needed.add(kotti_tinymce)
