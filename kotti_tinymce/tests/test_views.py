@@ -11,3 +11,7 @@ def test_external_image_list():
 
 def test_kottibrowser():
     pass
+
+
+def test_upload():
+    pass
