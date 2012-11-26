@@ -75,6 +75,10 @@ def test_kottibrowser(db_session, dummy_request):
 
 def test_upload(db_session, dummy_request):
     from webob.multidict import MultiDict
+    from StringIO import StringIO
+
+    class DummyFile(object):
+        file = StringIO('data')
 
     root = get_root()
 
@@ -86,3 +90,25 @@ def test_upload(db_session, dummy_request):
     kt.upload()
     assert dummy_request.session.pop_flash('error') == \
         [u'Please select a file to upload.']
+
+    dummy_file = DummyFile()
+    dummy_request.POST.add('uploadfile', dummy_file)
+    kt.upload()
+    assert dummy_request.session.pop_flash('error') == \
+        [u'Please select a file to upload.']
+
+    dummy_file.filename = 'file.txt'
+    dummy_file.type = 'text/plain'
+    res = kt.upload()
+    assert res.status == '302 Found'
+    assert res.location == 'http://example.com/title/@@kottibrowser'
+    assert dummy_request.session.pop_flash('success') == \
+        [u'Successfully uploaded.']
+
+    dummy_file.filename = 'file.jpg'
+    dummy_file.type = 'image/jpeg'
+    res = kt.upload()
+    assert res.status == '302 Found'
+    assert res.location == 'http://example.com/title-1/@@kottibrowser'
+    assert dummy_request.session.pop_flash('success') == \
+        [u'Successfully uploaded.']
