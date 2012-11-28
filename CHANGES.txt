@@ -8,6 +8,8 @@ ChangeLog
 
 -   Delete old tests from 0.1.  Setup new funcargs based tests.
 
+-   100% test coverage (again) with new funcargs tests (thanks teixas!).
+
 0.3.1
 -----
 
