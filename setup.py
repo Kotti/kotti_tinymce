@@ -8,15 +8,14 @@ README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 install_requires = [
-    # TinyMCE 4.x will likely have an incompatible plugin API
-    'js.tinymce<4.0-dev',
+    'js.tinymce==4.0.2',
     # Kotti with fanstatic or js.deform is required
     'Kotti>=0.7',
 ],
 
 setup(
     name='kotti_tinymce',
-    version='0.3.2',
+    version='0.4.0',
     description="TinyMCE plugins for Kotti",
     long_description=README + '\n\n' + CHANGES,
     classifiers=[

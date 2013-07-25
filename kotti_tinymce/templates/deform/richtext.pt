@@ -17,13 +17,13 @@
                     jqoid_preload.remove();
                     tinyMCE.init({
                         mode : 'exact',
-                        plugins : "advimage,advlink,advlist,contextmenu,inlinepopups,table",
+                        plugins : "image,link,advlist,contextmenu,table",
                         elements: oid,
                         strict_loading_mode : true,
                         height: '${field.widget.height}',
                         width: '${field.widget.width}',
                         skin : '${field.widget.skin}',
-                        theme : '${field.widget.theme}',
+                        theme : '${"modern" if field.widget.theme in [None, "advanced", "simple"] else field.widget.theme}',
                         theme_advanced_resizing : true,
                         theme_advanced_toolbar_align : 'left',
                         theme_advanced_toolbar_location : 'top',
@@ -35,9 +35,10 @@
                         table_row_limit : 5,
                         table_col_limit : 5,
                         relative_urls: false,
-                        external_image_list_url : 'external_image_list',
-                        external_link_list_url : 'external_link_list',
-                        file_browser_callback : 'kottibrowser',
+                        image_list : 'external_image_list',
+                        image_advtab: true,
+                        link_list : 'external_link_list',
+                        file_browser_callback : window.kottibrowser,
                         language: '<tal:block i18n:domain="deform" i18n:translate="language-code">en</tal:block>'
                     });
                     jqoid_preload.unbind('click');
