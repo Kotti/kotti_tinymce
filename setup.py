@@ -9,7 +9,7 @@ CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 install_requires = [
     # TinyMCE 4.x will likely have an incompatible plugin API
-    'js.tinymce<4.0-dev',
+    'js.tinymce==3.6.0dev',
     # Kotti with fanstatic or js.deform is required
     'Kotti>=0.7',
 ],

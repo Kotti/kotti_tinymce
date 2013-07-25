@@ -15,9 +15,10 @@
                 jqoid_preload.click(function(){
                     jqoid.show();
                     jqoid_preload.remove();
+                    console.info(window.kottibrowser)
                     tinyMCE.init({
                         mode : 'exact',
-                        plugins : "advimage,advlink,advlist,contextmenu,inlinepopups,table",
+                        plugins : "image,link,advlist,contextmenu,table",
                         elements: oid,
                         strict_loading_mode : true,
                         height: '${field.widget.height}',
@@ -35,9 +36,10 @@
                         table_row_limit : 5,
                         table_col_limit : 5,
                         relative_urls: false,
-                        external_image_list_url : 'external_image_list',
-                        external_link_list_url : 'external_link_list',
-                        file_browser_callback : 'kottibrowser',
+                        image_list : 'external_image_list',
+                        image_advtab: true,
+                        link_list : 'external_link_list',
+                        file_browser_callback : window.kottibrowser,
                         language: '<tal:block i18n:domain="deform" i18n:translate="language-code">en</tal:block>'
                     });
                     jqoid_preload.unbind('click');
