@@ -5,7 +5,6 @@ import json
 from fanstatic import Library
 from fanstatic import Resource
 from js.tinymce import tinymce
-#from js.tinymce import tinymcepopup
 from kotti.resources import Content
 from kotti.resources import File
 from kotti.resources import Image
@@ -77,7 +76,6 @@ class KottiTinyMCE():
                  renderer="kotti_tinymce:templates/kottibrowser.pt")
     def kottibrowser(self):
 
-        #tinymcepopup.need()
         kotti_tinymce.need()
 
         scales = [{

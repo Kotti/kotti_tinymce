@@ -15,7 +15,6 @@
                 jqoid_preload.click(function(){
                     jqoid.show();
                     jqoid_preload.remove();
-                    console.info(window.kottibrowser)
                     tinyMCE.init({
                         mode : 'exact',
                         plugins : "image,link,advlist,contextmenu,table",
@@ -24,7 +23,7 @@
                         height: '${field.widget.height}',
                         width: '${field.widget.width}',
                         skin : '${field.widget.skin}',
-                        theme : '${field.widget.theme}',
+                        theme : '${"modern" if field.widget.theme in [None, "advanced", "simple"] else field.widget.theme}',
                         theme_advanced_resizing : true,
                         theme_advanced_toolbar_align : 'left',
                         theme_advanced_toolbar_location : 'top',
