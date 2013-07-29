@@ -21,6 +21,9 @@ kotti_tinymce = Resource(library,
                          "kotti_tinymce.js",
                          minified="kotti_tinymce.min.js",
                          depends=[tinymce, ])
+kottiimage_plugin = Resource(library,
+                             "kottiimage_plugin.js",
+                             depends=[tinymce, ])
 
 
 @view_defaults(context=Content,
@@ -72,23 +75,34 @@ class KottiTinyMCE():
 
         return Response(body=response)
 
+    @view_config(name="kottiimage_plugin")
+    def kottiimage_plugin(self):
+
+        kottiimage_plugin.need()
+
+        image_scale_factors = [{
+            "name": name,
+            "size": size,
+        } for (name, size) in sorted(image_scales.items(), key=lambda x: x[1])]
+
+        kottiimage_plugin_source = json.dumps(kottiimage_plugin)
+        kottiimage_plugin_source = kottiimage_plugin_source.replace(
+                "/* IMAGE_SCALE_FACTORS_PLACEHOLDER */",
+                "var imageScaleFactors = %s;" % json.dumps(image_scale_factors))
+
+        print kottiimage_plugin_source
+        return Response(body=kottiimage_plugin_source)
+
     @view_config(name="kottibrowser",
                  renderer="kotti_tinymce:templates/kottibrowser.pt")
     def kottibrowser(self):
 
         kotti_tinymce.need()
 
-        scales = [{
-            "size": size,
-            "value": name,
-            "title": name,
-        } for (name, size) in sorted(image_scales.items(), key=lambda x: x[1])]
-
         return {
             "image_selectable": self.context.type == self.request.session["kottibrowser_requested_type"] == "image",
             "link_selectable": self.request.session["kottibrowser_requested_type"] != "image",
             "image_url": self.request.resource_url(self.context) + 'image',
-            "image_scales": scales,
             # TODO: upload_allowed needs a better check.
             "upload_allowed": self.context.type == 'document',
         }
@@ -158,6 +172,7 @@ def includeme(config):
         # kotti >= 0.8
         from js.deform import resource_mapping
         edit_needed = resource_mapping['tinymce'].append(kotti_tinymce)
+        resource_mapping['tinymce'].append(kottiimage_plugin)
     except ImportError:  # pragma: no cover
         # kotti < 0.8
         from kotti.static import edit_needed

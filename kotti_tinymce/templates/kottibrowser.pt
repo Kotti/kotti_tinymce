@@ -72,12 +72,6 @@
                         </script>
                         <label for="url" i18n:translate="">Image URL</label>
                         <input class="span12" type="text" name="url" id="url" value="${request.resource_url(context)}image" />
-                        <label for="image_scale" i18n:translate="">Image Scale</label>
-                        <select class="span12" name="image_scale">
-                            <option tal:repeat="image_scale image_scales" value="${image_scale.value}">
-                                ${image_scale.title}
-                            </option>
-                        </select>
                         <input class="btn btn-primary" type="button" value="Insert Image" onClick="kottibrowserdialog.submit();" />
                     </div>
                     <div tal:condition="upload_allowed">

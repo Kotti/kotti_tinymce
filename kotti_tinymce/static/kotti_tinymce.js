@@ -11,7 +11,7 @@
       kotti_url = kotti_url + "&type=" + type;
     }
     tinymce.activeEditor.windowManager.open({
-            title: "My file browser",
+            title: "Kotti Browser",
             url: kotti_url,
             width: 800,
             height: 600,
@@ -25,19 +25,10 @@
                 win.document.getElementById(field_name).value = url;
             }
       });
-
-
-
   };
 
   window.kottibrowserdialog = {
     init: function() {
-      return $("select[name=image_scale]").change(function() {
-        var image_scale_url;
-        image_scale_url = "" + image_url + "/" + ($(this).val());
-        $("#kottibrowser_image_preview").attr("src", image_scale_url);
-        return $("input[name=url]").val(image_scale_url);
-      });
     },
     submit: function() {
       var url, win;
