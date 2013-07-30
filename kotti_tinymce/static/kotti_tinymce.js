@@ -22,13 +22,25 @@
           window: win,
           input: field_name,
           oninsert: function(url) {
-                win.document.getElementById(field_name).value = url;
-            }
+              win.document.getElementById(field_name).value = url;
+          }
       });
   };
 
   window.kottibrowserdialog = {
     init: function() {
+        var args, win, url, title, description, src;
+
+        args = top.tinymce.activeEditor.windowManager.getParams();
+
+        url = $("#kottibrowser_form input#url").val();
+        win = args.window;
+
+        console.log(args, url, win.document.getElementById(args.input).value);
+        console.log($("#kottiimage"));
+        console.log($("#kottiimage").context);
+        // TODO: How can we get the title and description in the tinymce dialog?
+        //console.log($("#kottiimage").context.getElementById("#title"));
     },
     submit: function() {
       var url, win;
@@ -36,12 +48,13 @@
       url = $("#kottibrowser_form input#url").val();
       win = args.window;
       win.document.getElementById(args.input).value = url;
-      if (typeof win.ImageDialog !== "undefined") {
-        if (win.ImageDialog.getImageData) {
-          win.ImageDialog.getImageData();
+      console.log('args', args);
+      if (typeof win.showDialog !== "undefined") {
+        if (win.showDialog.getImageData) {
+          win.showDialog.getImageData();
         }
-        if (win.ImageDialog.showPreviewImage) {
-          win.ImageDialog.showPreviewImage(url);
+        if (win.showDialog.showPreviewImage) {
+          win.showDialog.showPreviewImage(url);
         }
       }
       top.tinymce.activeEditor.windowManager.close();

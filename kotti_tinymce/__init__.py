@@ -35,9 +35,9 @@ class KottiTinyMCE():
         self.context = context
         self.request = request
 
-        # put the requested type (image or file) into the session to
+        # Put the requested type (image or file) into the session to
         # enable browsing through the navigation tree without having
-        # to take special care while generation URLs
+        # to take special care while generating URLs.
         if "type" in request.GET:
             request.session["kottibrowser_requested_type"] = request.GET["type"]
         else:
@@ -156,7 +156,6 @@ class KottiTinyMCE():
         location = self.request.resource_url(resource, "@@kottibrowser")
 
         return HTTPFound(location=location)
-
 
 def kotti_configure(settings):
     settings['kotti.includes'] += ' kotti_tinymce'

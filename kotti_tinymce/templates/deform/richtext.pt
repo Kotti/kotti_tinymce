@@ -16,10 +16,9 @@
                 jqoid_preload.click(function(){
                     jqoid.show();
                     jqoid_preload.remove();
-                    tinymce.PluginManager.load('kottiimage', 'kottiimageurl');
                     tinyMCE.init({
                         mode : 'exact',
-                        plugins : "-kottiimage,link,advlist,textcolor,contextmenu,table",
+                        plugins : "kottiimage,link,advlist,textcolor,contextmenu,table",
                         elements: oid,
                         strict_loading_mode : true,
                         height: '${field.widget.height}',
