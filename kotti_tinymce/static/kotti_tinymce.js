@@ -49,12 +49,12 @@
       win = args.window;
       win.document.getElementById(args.input).value = url;
       console.log('args', args);
-      if (typeof win.showDialog !== "undefined") {
-        if (win.showDialog.getImageData) {
-          win.showDialog.getImageData();
+      if (typeof win.ImageDialog !== "undefined") {
+        if (win.ImageDialog.getImageData) {
+          win.ImageDialog.getImageData();
         }
-        if (win.showDialog.showPreviewImage) {
-          win.showDialog.showPreviewImage(url);
+        if (win.ImageDialog.showPreviewImage) {
+          win.ImageDialog.showPreviewImage(url);
         }
       }
       top.tinymce.activeEditor.windowManager.close();
