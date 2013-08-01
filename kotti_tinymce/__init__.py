@@ -75,24 +75,6 @@ class KottiTinyMCE():
 
         return Response(body=response)
 
-    @view_config(name="kottiimage_plugin")
-    def kottiimage_plugin(self):
-
-        kottiimage_plugin.need()
-
-        image_scale_factors = [{
-            "name": name,
-            "size": size,
-        } for (name, size) in sorted(image_scales.items(), key=lambda x: x[1])]
-
-        kottiimage_plugin_source = json.dumps(kottiimage_plugin)
-        kottiimage_plugin_source = kottiimage_plugin_source.replace(
-                "/* IMAGE_SCALE_FACTORS_PLACEHOLDER */",
-                "var imageScaleFactors = %s;" % json.dumps(image_scale_factors))
-
-        print kottiimage_plugin_source
-        return Response(body=kottiimage_plugin_source)
-
     @view_config(name="kottibrowser",
                  renderer="kotti_tinymce:templates/kottibrowser.pt")
     def kottibrowser(self):
@@ -102,7 +84,7 @@ class KottiTinyMCE():
         return {
             "image_selectable": self.context.type == self.request.session["kottibrowser_requested_type"] == "image",
             "link_selectable": self.request.session["kottibrowser_requested_type"] != "image",
-            "image_url": self.request.resource_url(self.context) + 'image',
+            "image_url": self.request.resource_url(self.context) + 'image/span1',
             # TODO: upload_allowed needs a better check.
             "upload_allowed": self.context.type == 'document',
         }

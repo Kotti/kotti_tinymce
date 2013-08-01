@@ -28,35 +28,28 @@
   };
 
   window.kottibrowserdialog = {
+
     init: function() {
-        var args, win, url, title, description, src;
-
-        args = top.tinymce.activeEditor.windowManager.getParams();
-
-        url = $("#kottibrowser_form input#url").val();
-        win = args.window;
-
-        console.log(args, url, win.document.getElementById(args.input).value);
-        console.log($("#kottiimage"));
-        console.log($("#kottiimage").context);
-        // TODO: How can we get the title and description in the tinymce dialog?
-        //console.log($("#kottiimage").context.getElementById("#title"));
+        // Did have image_scale change function here. Now this handling is in
+        // kottiimage_plugin.js.
     },
+
     submit: function() {
       var url, win;
       var args = top.tinymce.activeEditor.windowManager.getParams();
       url = $("#kottibrowser_form input#url").val();
       win = args.window;
-      win.document.getElementById(args.input).value = url;
-      console.log('args', args);
-      if (typeof win.ImageDialog !== "undefined") {
-        if (win.ImageDialog.getImageData) {
-          win.ImageDialog.getImageData();
-        }
-        if (win.ImageDialog.showPreviewImage) {
-          win.ImageDialog.showPreviewImage(url);
-        }
-      }
+
+      // NOTE: This does not fire an onchange event:
+      filepicker = win.document.getElementById(args.input);
+      filepicker.value = url;
+
+      // So force-fire one. (TODO: Is this a hacky way, or a correct way?).
+      // See http://www.tinymce.com/forum/viewtopic.php?id=31358.
+      var evt = win.document.createEvent("HTMLEvents");
+      evt.initEvent("change", false, true);
+      filepicker.dispatchEvent(evt);
+
       top.tinymce.activeEditor.windowManager.close();
     }
   };
