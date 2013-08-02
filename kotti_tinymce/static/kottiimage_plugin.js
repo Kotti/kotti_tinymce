@@ -159,11 +159,10 @@ tinymce.PluginManager.add('kottiimage', function(editor) {
                 }
             }
 
-            console.log('addImageScaleToURL', newURL);
             return newURL;
         }
 
-        function onSubmitForm() {
+        function setImage() {
             function waitLoad(imgElm) {
                 function selectImage() {
                     imgElm.onload = imgElm.onerror = null;
@@ -460,6 +459,11 @@ tinymce.PluginManager.add('kottiimage', function(editor) {
                                 console.log('setting image size', oldSrc, newSrc, newImageScale);
                                 scaleLabelCtrl.text(makeImageScaleLabel(newSrc, newImageScale));
                             }
+
+                            if (win.find('#show_preview')[0].checked()) {
+                                setImage();
+                            }
+
                             this.hide();
                         }
                     }
@@ -543,12 +547,20 @@ tinymce.PluginManager.add('kottiimage', function(editor) {
                                         type: 'checkbox', 
                                         checked: true, 
                                         tooltip: 'Do not distort -- keep original proportions.',
-                                        text: "Keep aspect ratio"}
+                                        text: "Keep aspect ratio"
+                                    }
                                 ]
                             }
                         ]
                     }
                 ]
+            },
+            {
+                name: 'show_preview', 
+                type: 'checkbox', 
+                checked: true, 
+                tooltip: 'Show live preview of image in the edit window.',
+                text: "Show Preview"
             }
         ];
 
@@ -627,7 +639,7 @@ tinymce.PluginManager.add('kottiimage', function(editor) {
                         ]
                     }
                 ],
-                onSubmit: onSubmitForm
+                onSubmit: setImage
             });
         } else {
             // Simple default dialog
@@ -635,7 +647,7 @@ tinymce.PluginManager.add('kottiimage', function(editor) {
                 title: 'Edit image',
                 data: data,
                 body: generalFormItems,
-                onSubmit: onSubmitForm
+                onSubmit: setImage
             });
         }
     }
