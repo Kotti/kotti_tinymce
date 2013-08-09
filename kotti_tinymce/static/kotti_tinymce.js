@@ -11,7 +11,7 @@
       kotti_url = kotti_url + "&type=" + type;
     }
     tinymce.activeEditor.windowManager.open({
-            title: "My file browser",
+            title: "Kotti Browser",
             url: kotti_url,
             width: 800,
             height: 600,
@@ -22,37 +22,34 @@
           window: win,
           input: field_name,
           oninsert: function(url) {
-                win.document.getElementById(field_name).value = url;
-            }
+              win.document.getElementById(field_name).value = url;
+          }
       });
-
-
-
   };
 
   window.kottibrowserdialog = {
+
     init: function() {
-      return $("select[name=image_scale]").change(function() {
-        var image_scale_url;
-        image_scale_url = "" + image_url + "/" + ($(this).val());
-        $("#kottibrowser_image_preview").attr("src", image_scale_url);
-        return $("input[name=url]").val(image_scale_url);
-      });
+        // Did have image_scale change function here. Now this handling is in
+        // kottiimage_plugin.js.
     },
+
     submit: function() {
       var url, win;
       var args = top.tinymce.activeEditor.windowManager.getParams();
       url = $("#kottibrowser_form input#url").val();
       win = args.window;
-      win.document.getElementById(args.input).value = url;
-      if (typeof win.ImageDialog !== "undefined") {
-        if (win.ImageDialog.getImageData) {
-          win.ImageDialog.getImageData();
-        }
-        if (win.ImageDialog.showPreviewImage) {
-          win.ImageDialog.showPreviewImage(url);
-        }
-      }
+
+      // NOTE: This does not fire an onchange event:
+      filepicker = win.document.getElementById(args.input);
+      filepicker.value = url;
+
+      // So force-fire one. (TODO: Is this a hacky way, or a correct way?).
+      // See http://www.tinymce.com/forum/viewtopic.php?id=31358.
+      var evt = win.document.createEvent("HTMLEvents");
+      evt.initEvent("change", false, true);
+      filepicker.dispatchEvent(evt);
+
       top.tinymce.activeEditor.windowManager.close();
     }
   };
