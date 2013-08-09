@@ -4,6 +4,7 @@
 <textarea id="${field.oid}" name="${field.name}" class='tinymce' tal:content="structure cstruct" />
 <span id="${field.oid}-preload" class="tinymce-preload" tal:content="structure cstruct" />
 <script language="javascript" type="text/javascript">
+
     (function($){
 
         deform.addCallback(
@@ -17,7 +18,7 @@
                     jqoid_preload.remove();
                     tinyMCE.init({
                         mode : 'exact',
-                        plugins : "image,link,advlist,contextmenu,table",
+                        plugins : "kottiimage,link,advlist,textcolor,contextmenu,table",
                         elements: oid,
                         strict_loading_mode : true,
                         height: '${field.widget.height}',

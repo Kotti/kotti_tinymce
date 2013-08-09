@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+0.4b2
+-----
+
+-   New image plugin UI with advanced image sizing. (geojeff)
+
 0.4b1
 -----
 
