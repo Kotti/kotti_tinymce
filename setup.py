@@ -15,7 +15,7 @@ install_requires = [
 
 setup(
     name='kotti_tinymce',
-    version='0.4b2dev',
+    version='0.4b2',
     description="TinyMCE plugins for Kotti",
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
@@ -36,8 +36,8 @@ setup(
     zip_safe=False,
     install_requires=install_requires,
     entry_points={
-      'fanstatic.libraries':
-          ["tinymce = kotti_tinymce:library", ],
+        'fanstatic.libraries':
+            ["tinymce = kotti_tinymce:library", ],
     },
     message_extractors={
         "kotti_tinymce": [
