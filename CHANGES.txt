@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+0.4b5
+-----
+
+-   No changes yet.
+
 0.4b4
 -----
 
