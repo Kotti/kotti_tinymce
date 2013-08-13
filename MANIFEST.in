@@ -1,5 +1,5 @@
 include README.rst
 include CHANGES.txt
 recursive-include kotti_tinymce/locale *
-recursive-include kotti_tinymce/static *.js
-recursive-include kotti_tinymce/templates *.pt
+recursive-include kotti_tinymce/static *
+recursive-include kotti_tinymce/templates *
