@@ -18,7 +18,14 @@
                     jqoid_preload.remove();
                     tinyMCE.init({
                         mode : 'exact',
-                        plugins : "kottiimage,link,advlist,textcolor,contextmenu,table",
+                        plugins : "codemirror,kottiimage,link,advlist,textcolor,contextmenu,table",
+                        codemirror: {
+                            // codemirror **plugin** config options
+                            indentOnInit: false,
+                            config: {
+                                // codemirror config options
+                            }
+                        },
                         elements: oid,
                         strict_loading_mode : true,
                         height: '${field.widget.height}',
