@@ -10,20 +10,30 @@ from kotti.resources import File
 from kotti.resources import Image
 from kotti.util import _
 from kotti.util import title_to_name
-from kotti.views.image import image_scales
 from pyramid.httpexceptions import HTTPFound
 from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.view import view_defaults
 
 library = Library('kotti_tinymce', 'static')
-kotti_tinymce = Resource(library,
-                         "kotti_tinymce.js",
-                         minified="kotti_tinymce.min.js",
-                         depends=[tinymce, ])
-kottiimage_plugin = Resource(library,
-                             "kottiimage_plugin.js",
-                             depends=[tinymce, ])
+
+kotti_tinymce = Resource(
+    library,
+    "kotti_tinymce.js",
+    minified="kotti_tinymce.min.js",
+    depends=[tinymce, ]
+)
+codemirror_plugin = Resource(
+    library,
+    "codemirror/plugin.js",
+    depends=[tinymce, ]
+)
+kottiimage_plugin = Resource(
+    library,
+    "kottiimage_plugin.js",
+    minified="kottiimage_plugin.min.js",
+    depends=[tinymce, ]
+)
 
 
 @view_defaults(context=Content,
@@ -82,9 +92,16 @@ class KottiTinyMCE():
         kotti_tinymce.need()
 
         return {
-            "image_selectable": self.context.type == self.request.session["kottibrowser_requested_type"] == "image",
-            "link_selectable": self.request.session["kottibrowser_requested_type"] != "image",
-            "image_url": self.request.resource_url(self.context) + 'image/span1',
+            "image_selectable":
+            self.context.type ==
+            self.request.session["kottibrowser_requested_type"] == "image",
+
+            "link_selectable":
+            self.request.session["kottibrowser_requested_type"] != "image",
+
+            "image_url":
+            self.request.resource_url(self.context) + 'image/span1',
+
             # TODO: upload_allowed needs a better check.
             "upload_allowed": self.context.type == 'document',
         }
@@ -131,13 +148,14 @@ class KottiTinyMCE():
             filename=filename,
             mimetype=mimetype,
             size=size
-            )
+        )
 
         self.request.session.flash(_("Successfully uploaded."), "success")
 
         location = self.request.resource_url(resource, "@@kottibrowser")
 
         return HTTPFound(location=location)
+
 
 def kotti_configure(settings):
     settings['kotti.includes'] += ' kotti_tinymce'
@@ -154,6 +172,7 @@ def includeme(config):
         from js.deform import resource_mapping
         edit_needed = resource_mapping['tinymce'].append(kotti_tinymce)
         resource_mapping['tinymce'].append(kottiimage_plugin)
+        resource_mapping['tinymce'].append(codemirror_plugin)
     except ImportError:  # pragma: no cover
         # kotti < 0.8
         from kotti.static import edit_needed
