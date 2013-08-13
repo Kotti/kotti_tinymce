@@ -4,7 +4,7 @@ ChangeLog
 0.4b4
 -----
 
--   No changes yet.
+-   Fix packaging.
 
 0.4b3
 -----
