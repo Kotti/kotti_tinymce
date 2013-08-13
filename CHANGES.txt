@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+0.4b3
+-----
+
+-   Add CodeMirror plugin to regain source editing feature.
+
 0.4b2
 -----
 

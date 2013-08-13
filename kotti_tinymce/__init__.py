@@ -31,6 +31,7 @@ codemirror_plugin = Resource(
 kottiimage_plugin = Resource(
     library,
     "kottiimage_plugin.js",
+    minified="kottiimage_plugin.min.js",
     depends=[tinymce, ]
 )
 
