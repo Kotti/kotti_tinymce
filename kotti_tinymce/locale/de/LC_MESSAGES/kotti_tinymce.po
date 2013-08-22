@@ -1,16 +1,16 @@
 # German translations for kotti_tinymce.
-# Copyright (C) 2013 ORGANIZATION
+# Copyright (C) 2012 ORGANIZATION
 # This file is distributed under the same license as the kotti_tinymce
 # project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: kotti_tinymce 0.4b5dev\n"
+"Project-Id-Version: kotti_tinymce 0.2.2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-14 14:03+0200\n"
-"PO-Revision-Date: 2013-08-14 13:54+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-08-22 12:22+0200\n"
+"PO-Revision-Date: 2012-07-13 11:41+0200\n"
+"Last-Translator: Christian Neumann <cneumann@datenkarussell.de>\n"
 "Language-Team: de <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
@@ -20,19 +20,21 @@ msgstr ""
 
 #: kotti_tinymce/__init__.py:119 kotti_tinymce/__init__.py:127
 msgid "Please select a file to upload."
-msgstr ""
+msgstr "Bitte wählen Sie eine Datei zum Hochladen aus."
 
 #: kotti_tinymce/__init__.py:153
 msgid "Successfully uploaded."
-msgstr ""
+msgstr "Erfolgreich hochgeladen."
 
 #: kotti_tinymce/templates/kottibrowser.pt:34
 msgid "Navigation"
-msgstr ""
+msgstr "Navigation"
 
 #: kotti_tinymce/templates/kottibrowser.pt:62
+#, fuzzy
+#| msgid "Selection"
 msgid "Selected Link"
-msgstr ""
+msgstr "Auswahl"
 
 #: kotti_tinymce/templates/kottibrowser.pt:67
 msgid "Selected Image"
@@ -40,27 +42,30 @@ msgstr ""
 
 #: kotti_tinymce/templates/kottibrowser.pt:70
 msgid "Image URL"
-msgstr ""
+msgstr "Bild-URL"
 
 #: kotti_tinymce/templates/kottibrowser.pt:76
 #: kotti_tinymce/templates/kottibrowser.pt:89
 msgid "Upload"
-msgstr ""
+msgstr "Hochladen"
 
 #: kotti_tinymce/templates/kottibrowser.pt:83
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: kotti_tinymce/templates/kottibrowser.pt:85
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: kotti_tinymce/templates/kottibrowser.pt:87
 msgid "File"
-msgstr ""
+msgstr "Datei"
 
 #. Default: en
 #: kotti_tinymce/templates/deform/richtext.pt:48
 msgid "language-code"
 msgstr "de"
+
+#~ msgid "Image Scale"
+#~ msgstr "Bildgröße"
 
