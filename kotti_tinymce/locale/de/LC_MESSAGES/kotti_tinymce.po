@@ -31,8 +31,6 @@ msgid "Navigation"
 msgstr "Navigation"
 
 #: kotti_tinymce/templates/kottibrowser.pt:62
-#, fuzzy
-#| msgid "Selection"
 msgid "Selected Link"
 msgstr "Auswahl"
 

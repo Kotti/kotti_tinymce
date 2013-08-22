@@ -20,19 +20,19 @@ msgstr ""
 
 #: kotti_tinymce/__init__.py:119 kotti_tinymce/__init__.py:127
 msgid "Please select a file to upload."
-msgstr ""
+msgstr "Bitte wählen Sie eine Datei zum Hochladen aus."
 
 #: kotti_tinymce/__init__.py:153
 msgid "Successfully uploaded."
-msgstr ""
+msgstr "Erfolgreich hochgeladen."
 
 #: kotti_tinymce/templates/kottibrowser.pt:34
 msgid "Navigation"
-msgstr ""
+msgstr "Navigation"
 
 #: kotti_tinymce/templates/kottibrowser.pt:62
 msgid "Selected Link"
-msgstr ""
+msgstr "Auswahl"
 
 #: kotti_tinymce/templates/kottibrowser.pt:67
 msgid "Selected Image"
@@ -40,27 +40,29 @@ msgstr ""
 
 #: kotti_tinymce/templates/kottibrowser.pt:70
 msgid "Image URL"
-msgstr ""
+msgstr "Bild-URL"
 
 #: kotti_tinymce/templates/kottibrowser.pt:76
 #: kotti_tinymce/templates/kottibrowser.pt:89
 msgid "Upload"
-msgstr ""
+msgstr "Hochladen"
 
 #: kotti_tinymce/templates/kottibrowser.pt:83
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: kotti_tinymce/templates/kottibrowser.pt:85
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: kotti_tinymce/templates/kottibrowser.pt:87
 msgid "File"
-msgstr ""
+msgstr "Datei"
 
 #. Default: en
 #: kotti_tinymce/templates/deform/richtext.pt:48
 msgid "language-code"
 msgstr "de"
+
+
 
