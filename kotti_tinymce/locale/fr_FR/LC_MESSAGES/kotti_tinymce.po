@@ -1,4 +1,4 @@
-# Translations template for kotti_tinymce.
+# French (France) translations for kotti_tinymce.
 # Copyright (C) 2012 ORGANIZATION
 # This file is distributed under the same license as the kotti_tinymce
 # project.
@@ -8,54 +8,59 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kotti_tinymce 0.2.2\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-07-13 11:41+0200\n"
+"POT-Creation-Date: 2013-08-22 12:22+0200\n"
 "PO-Revision-Date: 2013-08-08 17:55+0100\n"
 "Last-Translator: Fabien Castarède <fabien.castarede@free.fr>\n"
 "Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-"X-Generator: Poedit 1.5.7\n"
 
-#: kotti_tinymce/__init__.py:102 kotti_tinymce/__init__.py:107
+#: kotti_tinymce/__init__.py:119 kotti_tinymce/__init__.py:127
 msgid "Please select a file to upload."
 msgstr "Veuillez sélectionner un fichier à téléverser."
 
-#: kotti_tinymce/__init__.py:131
+#: kotti_tinymce/__init__.py:153
 msgid "Successfully uploaded."
 msgstr "Téléversement réussi."
 
-#: kotti_tinymce/templates/kottibrowser.pt:33
+#: kotti_tinymce/templates/kottibrowser.pt:34
 msgid "Navigation"
 msgstr "Navigation"
 
-#: kotti_tinymce/templates/kottibrowser.pt:61
-#: kotti_tinymce/templates/kottibrowser.pt:66
-msgid "Selection"
+#: kotti_tinymce/templates/kottibrowser.pt:62
+msgid "Selected Link"
 msgstr "Sélection"
 
-#: kotti_tinymce/templates/kottibrowser.pt:72
+#: kotti_tinymce/templates/kottibrowser.pt:67
+msgid "Selected Image"
+msgstr ""
+
+#: kotti_tinymce/templates/kottibrowser.pt:70
 msgid "Image URL"
 msgstr "URL de l'image"
 
-#: kotti_tinymce/templates/kottibrowser.pt:74
-msgid "Image Scale"
-msgstr "Echelle de l'image"
-
-#: kotti_tinymce/templates/kottibrowser.pt:84
-#: kotti_tinymce/templates/kottibrowser.pt:97
+#: kotti_tinymce/templates/kottibrowser.pt:76
+#: kotti_tinymce/templates/kottibrowser.pt:89
 msgid "Upload"
 msgstr "Téléverser"
 
-#: kotti_tinymce/templates/kottibrowser.pt:91
+#: kotti_tinymce/templates/kottibrowser.pt:83
 msgid "Title"
 msgstr "Titre"
 
-#: kotti_tinymce/templates/kottibrowser.pt:93
+#: kotti_tinymce/templates/kottibrowser.pt:85
 msgid "Description"
 msgstr "Description"
 
-#: kotti_tinymce/templates/kottibrowser.pt:95
+#: kotti_tinymce/templates/kottibrowser.pt:87
 msgid "File"
 msgstr "Fichier"
+
+#. Default: en
+#: kotti_tinymce/templates/deform/richtext.pt:48
+msgid "language-code"
+msgstr "fr_FR"
+

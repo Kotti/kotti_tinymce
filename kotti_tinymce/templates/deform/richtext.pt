@@ -45,7 +45,7 @@
           image_advtab: true,
           link_list : 'external_link_list',
           file_browser_callback : window.kottibrowser,
-          language: '<tal:block i18n:domain="deform" i18n:translate="language-code">en</tal:block>'
+          language: '<tal:block i18n:domain="kotti_tinymce" i18n:translate="language-code">en</tal:block>'
         });
         jqoid_preload.unbind('click');
       });
