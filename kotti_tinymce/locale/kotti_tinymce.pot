@@ -1,15 +1,15 @@
 # Translations template for kotti_tinymce.
-# Copyright (C) 2012 ORGANIZATION
+# Copyright (C) 2013 ORGANIZATION
 # This file is distributed under the same license as the kotti_tinymce
 # project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: kotti_tinymce 0.2.2\n"
+"Project-Id-Version: kotti_tinymce 0.4b5dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2012-07-13 11:41+0200\n"
+"POT-Creation-Date: 2013-08-22 12:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,44 +18,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: kotti_tinymce/__init__.py:102 kotti_tinymce/__init__.py:107
+#: kotti_tinymce/__init__.py:119 kotti_tinymce/__init__.py:127
 msgid "Please select a file to upload."
 msgstr ""
 
-#: kotti_tinymce/__init__.py:131
+#: kotti_tinymce/__init__.py:153
 msgid "Successfully uploaded."
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:33
+#: kotti_tinymce/templates/kottibrowser.pt:34
 msgid "Navigation"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:61
-#: kotti_tinymce/templates/kottibrowser.pt:66
-msgid "Selection"
+#: kotti_tinymce/templates/kottibrowser.pt:62
+msgid "Selected Link"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:72
+#: kotti_tinymce/templates/kottibrowser.pt:67
+msgid "Selected Image"
+msgstr ""
+
+#: kotti_tinymce/templates/kottibrowser.pt:70
 msgid "Image URL"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:74
-msgid "Image Scale"
-msgstr ""
-
-#: kotti_tinymce/templates/kottibrowser.pt:84
-#: kotti_tinymce/templates/kottibrowser.pt:97
+#: kotti_tinymce/templates/kottibrowser.pt:76
+#: kotti_tinymce/templates/kottibrowser.pt:89
 msgid "Upload"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:91
+#: kotti_tinymce/templates/kottibrowser.pt:83
 msgid "Title"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:93
+#: kotti_tinymce/templates/kottibrowser.pt:85
 msgid "Description"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:95
+#: kotti_tinymce/templates/kottibrowser.pt:87
 msgid "File"
 msgstr ""
+
+#. Default: en
+#: kotti_tinymce/templates/deform/richtext.pt:48
+msgid "language-code"
+msgstr ""
+
