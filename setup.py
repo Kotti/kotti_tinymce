@@ -28,7 +28,7 @@ setup(
     ],
     author='Andreas Kaiser',
     author_email='disko@binary-punks.com',
-    url='https://github.com/disko/kotti_tinymce',
+    url='https://github.com/Kotti/kotti_tinymce',
     keywords='tinymce image browser kotti cms pylons pyramid',
     license="BSD",
     packages=find_packages(),
