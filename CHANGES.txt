@@ -1,10 +1,17 @@
 ChangeLog
 =========
 
-0.4b5
------
+0.4
+---
 
--   No changes yet.
+-   Fix link for PyPI - the old one 404's. (ddimmich)
+
+-   Fix German and French translations that got marked as fuzzy. (ferewuz)
+
+-   Update German translations, some translations got lost before. (ferewuz)
+
+-   Move language code translations to kotti_tinymce and initialize all
+    languages that are present in deform. (ferewuz)
 
 0.4b4
 -----
