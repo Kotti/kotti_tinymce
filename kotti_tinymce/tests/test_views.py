@@ -55,11 +55,12 @@ def test_kottibrowser(db_session, dummy_request):
 
     kt = KottiTinyMCE(root, dummy_request)
     browser = kt.kottibrowser()
-    assert len(browser['image_scales']) == 12
-    assert browser['image_scales'][0] == \
-        {'size': [60, 120], 'title': 'span1', 'value': 'span1'}
+    # image_scales do no longer exist as of 0.4
+    # assert len(browser['image_scales']) == 12
+    # assert browser['image_scales'][0] == \
+    #     {'size': [60, 120], 'title': 'span1', 'value': 'span1'}
     assert browser['image_selectable'] is False
-    assert browser['image_url'] == 'http://example.com/image'
+    assert browser['image_url'] == 'http://example.com/image/span1'
     assert browser['link_selectable'] is True
     assert browser['upload_allowed'] is True
 
@@ -67,9 +68,9 @@ def test_kottibrowser(db_session, dummy_request):
     dummy_request.params['type'] = 'image'
     kt = KottiTinyMCE(image, dummy_request)
     browser = kt.kottibrowser()
-    assert len(browser['image_scales']) == 12
+    # assert len(browser['image_scales']) == 12
     assert browser['image_selectable'] is True
-    assert browser['image_url'] == 'http://example.com/image/image'
+    assert browser['image_url'] == 'http://example.com/image/image/span1'
     assert browser['link_selectable'] is False
     assert browser['upload_allowed'] is False
 
