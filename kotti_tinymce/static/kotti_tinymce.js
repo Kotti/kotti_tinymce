@@ -11,20 +11,19 @@
       kotti_url = kotti_url + "&type=" + type;
     }
     tinymce.activeEditor.windowManager.open({
-            title: "Kotti Browser",
-            url: kotti_url,
-            width: 800,
-            height: 600,
-            resizable: "yes"
-
-        },
-        {
-          window: win,
-          input: field_name,
-          oninsert: function(url) {
-              win.document.getElementById(field_name).value = url;
-          }
-      });
+      title: "Kotti Browser",
+      url: kotti_url,
+      width: 800,
+      height: 600,
+      resizable: "yes"
+    },
+    {
+      window: win,
+      input: field_name,
+      oninsert: function(url) {
+        win.document.getElementById(field_name).value = url;
+      }
+    });
   };
 
   window.kottibrowserdialog = {
