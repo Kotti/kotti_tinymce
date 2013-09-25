@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+0.4.1
+-----
+
+-   Fix broken source code editing.
+
 0.4
 ---
 
