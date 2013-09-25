@@ -2,6 +2,7 @@
      xmlns:tal="http://xml.zope.org/namespaces/tal"
      tal:omit-tag=""
      tal:define='get_theme import: kotti_tinymce.utils.get_theme;
+                 tinymce_options tinymce_options|field.widget.tinymce_options|{};
                  theme python: get_theme(tinymce_options)'>
 
 <textarea id="${field.oid}" name="${field.name}" class='tinymce' tal:content="structure cstruct" />
@@ -18,7 +19,6 @@
         jqoid.show();
         jqoid_preload.remove();
         tinyMCE.init({
-            <tal:block condition="tinymce_options">${tinymce_options},</tal:block>
             plugins : "codemirror,kottiimage,link,advlist,textcolor,contextmenu,table",
             codemirror: {
               // codemirror **plugin** config options
@@ -27,7 +27,6 @@
                 // codemirror config options
               }
             },
-            theme: '${theme}',
             elements: oid,
             theme_advanced_buttons3_add : "tablecontrols",
             table_styles : "Header 1=header1;Header 2=header2;Header 3=header3",
@@ -41,7 +40,9 @@
             image_advtab: true,
             link_list : 'external_link_list',
             file_browser_callback : window.kottibrowser,
-            language: '<tal:block i18n:domain="kotti_tinymce" i18n:translate="language-code">en</tal:block>'
+            language: '<tal:block i18n:domain="kotti_tinymce" i18n:translate="language-code">en</tal:block>',
+            <tal:block condition="tinymce_options">${tinymce_options},</tal:block>
+            theme: '${theme}'
           });
         jqoid_preload.unbind('click');
       });
