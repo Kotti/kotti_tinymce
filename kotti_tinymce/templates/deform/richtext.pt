@@ -2,7 +2,7 @@
      xmlns:tal="http://xml.zope.org/namespaces/tal"
      tal:omit-tag=""
      tal:define='get_theme import: kotti_tinymce.utils.get_theme;
-                 tinymce_options tinymce_options|field.widget.tinymce_options|{};
+                 tinymce_options tinymce_options|field.widget.tinymce_options|"";
                  theme python: get_theme(tinymce_options)'>
 
 <textarea id="${field.oid}" name="${field.name}" class='tinymce' tal:content="structure cstruct" />
