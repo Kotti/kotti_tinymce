@@ -257,7 +257,7 @@ tinymce.PluginManager.add('kottiimage', function(editor) {
                     label = 'Current Size: ' + imageScale;
                 } else {
                     // We were passed a src, but no imageScale, so parse imageScale from src.
-                    
+
                     parts = src.split('/');
 
                     if (parts.length > 0) {
@@ -365,7 +365,7 @@ tinymce.PluginManager.add('kottiimage', function(editor) {
                 type: 'panelbutton',
                 text: 'Change Size',
                 popoverAlign: 'bc-tl',
-                panel: 
+                panel:
                 {
                     // Adapted from table plugin.
                     type: 'panel',
@@ -521,7 +521,7 @@ tinymce.PluginManager.add('kottiimage', function(editor) {
                                 spacing: 5,
                                 items: [
                                     {
-                                        type: 'label', 
+                                        type: 'label',
                                         text: 'Width and Height',
                                         tooltip: 'Optionally, set width and size directly.'
                                     },
@@ -543,9 +543,9 @@ tinymce.PluginManager.add('kottiimage', function(editor) {
                                         onchange: recalcSize
                                     },
                                     {
-                                        name: 'constrain', 
-                                        type: 'checkbox', 
-                                        checked: true, 
+                                        name: 'constrain',
+                                        type: 'checkbox',
+                                        checked: true,
                                         tooltip: 'Do not distort -- keep original proportions.',
                                         text: "Keep aspect ratio"
                                     }
@@ -556,9 +556,9 @@ tinymce.PluginManager.add('kottiimage', function(editor) {
                 ]
             },
             {
-                name: 'show_preview', 
-                type: 'checkbox', 
-                checked: true, 
+                name: 'show_preview',
+                type: 'checkbox',
+                checked: true,
                 tooltip: 'Show live preview of image in the edit window.',
                 text: "Show Preview"
             }
@@ -616,6 +616,11 @@ tinymce.PluginManager.add('kottiimage', function(editor) {
                             {
                                 label: 'Style',
                                 name: 'style',
+                                type: 'textbox'
+                            },
+                            {
+                                label: 'Alt text',
+                                name: 'alt',
                                 type: 'textbox'
                             },
                             {
