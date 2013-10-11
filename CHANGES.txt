@@ -6,6 +6,11 @@ ChangeLog
 
 -   No changes yet.
 
+0.4.2
+---
+
+-   Added abiltiy to add alt text to images via kottiimage plugin.
+
 0.4.1
 -----
 
