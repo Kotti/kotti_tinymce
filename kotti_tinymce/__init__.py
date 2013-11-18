@@ -91,6 +91,11 @@ class KottiTinyMCE():
 
         kotti_tinymce.need()
 
+        if self.request.session["kottibrowser_requested_type"] == "image":
+            upload_allowed = Image.type_info.addable(self.context, self.request)
+        else:
+            upload_allowed = File.type_info.addable(self.context, self.request)
+
         return {
             "image_selectable":
             self.context.type ==
@@ -102,8 +107,7 @@ class KottiTinyMCE():
             "image_url":
             self.request.resource_url(self.context) + 'image/span1',
 
-            # TODO: upload_allowed needs a better check.
-            "upload_allowed": self.context.type == 'document',
+            "upload_allowed": upload_allowed,
         }
 
     @view_config(name="kottibrowser",
