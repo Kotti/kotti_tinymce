@@ -1,6 +1,10 @@
 <div xmlns:i18n="http://xml.zope.org/namespaces/i18n"
      xmlns:tal="http://xml.zope.org/namespaces/tal"
-     tal:omit-tag="">
+     tal:omit-tag=""
+     tal:define='get_theme import: kotti_tinymce.utils.get_theme;
+                 tinymce_options tinymce_options|field.widget.tinymce_options|"";
+                 theme python: get_theme(tinymce_options)'>
+
 <textarea id="${field.oid}" name="${field.name}" class='tinymce' tal:content="structure cstruct" />
 <span id="${field.oid}-preload" class="tinymce-preload" tal:content="structure cstruct" />
 <script language="javascript" type="text/javascript">
@@ -15,38 +19,31 @@
         jqoid.show();
         jqoid_preload.remove();
         tinyMCE.init({
-          mode : 'exact',
-          plugins : "codemirror,kottiimage,link,advlist,textcolor,contextmenu,table",
-          codemirror: {
-            // codemirror **plugin** config options
-            indentOnInit: false,
-            config: {
-              // codemirror config options
-            }
-          },
-          elements: oid,
-          strict_loading_mode : true,
-          height: '${field.widget.height}',
-          width: '${field.widget.width}',
-          skin : '${field.widget.skin}',
-          theme : '${"modern" if field.widget.theme in [None, "advanced", "simple"] else field.widget.theme}',
-          theme_advanced_resizing : true,
-          theme_advanced_toolbar_align : 'left',
-          theme_advanced_toolbar_location : 'top',
-          theme_advanced_buttons3_add : "tablecontrols",
-          table_styles : "Header 1=header1;Header 2=header2;Header 3=header3",
-          table_cell_styles : "Header 1=header1;Header 2=header2;Header 3=header3;Table Cell=tableCel1",
-          table_row_styles : "Header 1=header1;Header 2=header2;Header 3=header3;Table Row=tableRow1",
-          table_cell_limit : 100,
-          table_row_limit : 5,
-          table_col_limit : 5,
-          relative_urls: false,
-          image_list : 'external_image_list',
-          image_advtab: true,
-          link_list : 'external_link_list',
-          file_browser_callback : window.kottibrowser,
-          language: '<tal:block i18n:domain="kotti_tinymce" i18n:translate="language-code">en</tal:block>'
-        });
+            plugins : "codemirror,kottiimage,link,advlist,textcolor,contextmenu,table",
+            codemirror: {
+              // codemirror **plugin** config options
+              indentOnInit: false,
+              config: {
+                // codemirror config options
+              }
+            },
+            elements: oid,
+            theme_advanced_buttons3_add : "tablecontrols",
+            table_styles : "Header 1=header1;Header 2=header2;Header 3=header3",
+            table_cell_styles : "Header 1=header1;Header 2=header2;Header 3=header3;Table Cell=tableCel1",
+            table_row_styles : "Header 1=header1;Header 2=header2;Header 3=header3;Table Row=tableRow1",
+            table_cell_limit : 100,
+            table_row_limit : 5,
+            table_col_limit : 5,
+            relative_urls: false,
+            image_list : 'external_image_list',
+            image_advtab: true,
+            link_list : 'external_link_list',
+            file_browser_callback : window.kottibrowser,
+            language: '<tal:block i18n:domain="kotti_tinymce" i18n:translate="language-code">en</tal:block>',
+            <tal:block condition="tinymce_options">${tinymce_options},</tal:block>
+            theme: '${theme}'
+          });
         jqoid_preload.unbind('click');
       });
       if(!${str(bool(field.widget.delayed_load)).lower()}){

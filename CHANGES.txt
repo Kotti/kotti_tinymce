@@ -4,7 +4,12 @@ ChangeLog
 0.5
 ---
 
--   No changes yet.
+-   Change richtext.pt template to reflect latest changes in deform, as our old
+    template caused JS errors with newest versions of deform (nightmarebadger).
+    Basic options (height, width, skin, theme) can still be passed directly to
+    the RichTextWidget(), but we can now pass whatever options we want using
+    RichTextWidget(options=(("option_name", "option_value"))). Requires deform
+    0.9.9 or higher.
 
 0.4.2
 ---

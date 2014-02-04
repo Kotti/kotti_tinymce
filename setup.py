@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 
 from setuptools import find_packages
@@ -11,6 +13,7 @@ install_requires = [
     'js.tinymce==4.0.2',
     # Kotti with fanstatic or js.deform is required
     'Kotti>=0.7',
+    'deform>=0.9.9',
 ],
 
 setup(
