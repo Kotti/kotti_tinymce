@@ -1,16 +1,18 @@
 ChangeLog
 =========
 
-0.5
----
+0.5dev
+------
+
+- No changes yet.
+
+0.4.2
+-----
+
+- Added abiltiy to add alt text to images via kottiimage plugin.
 
 - Use the new ``kotti_context_url`` JS global variable (introduced in
   Kotti 0.10) if it is available.
-
-0.4.2
----
-
-- Added abiltiy to add alt text to images via kottiimage plugin.
 
 0.4.1
 -----
