@@ -1,100 +1,113 @@
 ChangeLog
 =========
 
+0.5dev
+------
+
+- No changes yet.
+
+0.4.2
+-----
+
+- Added abiltiy to add alt text to images via kottiimage plugin.
+
+- Use the new ``kotti_context_url`` JS global variable (introduced in
+  Kotti 0.10) if it is available.
+
 0.4.1
 -----
 
--   Fix broken source code editing.
+- Fix broken source code editing.
 
 0.4
 ---
 
--   Fix link for PyPI - the old one 404's. (ddimmich)
+- Fix link for PyPI - the old one 404's. (ddimmich)
 
--   Fix German and French translations that got marked as fuzzy. (ferewuz)
+- Fix German and French translations that got marked as fuzzy. (ferewuz)
 
--   Update German translations, some translations got lost before. (ferewuz)
+- Update German translations, some translations got lost before. (ferewuz)
 
--   Move language code translations to kotti_tinymce and initialize all
-    languages that are present in deform. (ferewuz)
+- Move language code translations to kotti_tinymce and initialize all
+  languages that are present in deform. (ferewuz)
 
 0.4b4
 -----
 
--   Fix packaging.
+- Fix packaging.
 
 0.4b3
 -----
 
--   Add CodeMirror plugin to regain source editing feature.
+- Add CodeMirror plugin to regain source editing feature.
 
 0.4b2
 -----
 
--   New image plugin UI with advanced image sizing. (geojeff)
+- New image plugin UI with advanced image sizing. (geojeff)
 
 0.4b1
 -----
 
--   Changed javascript and templates to support new version of js.tinymce
-    (ferewuz)
+- Changed javascript and templates to support new version of js.tinymce
+  (ferewuz)
 
 
 0.3.2
 -----
 
--   Separate ``install_requires`` and ``tests_require``.
+- Separate ``install_requires`` and ``tests_require``.
 
--   Delete old tests from 0.1.  Setup new funcargs based tests.
+- Delete old tests from 0.1.  Setup new funcargs based tests.
 
--   100% test coverage (again) with new funcargs tests (thanks teixas!).
+- 100% test coverage (again) with new funcargs tests (thanks teixas!).
 
 0.3.1
 -----
 
--   Fix include of kotti_tinymce.js to popup window.
+- Fix include of kotti_tinymce.js to popup window.
 
 0.3
 ---
 
--   Support js.deform (available with Kotti >= 0.8) to only include
-    the JS when rendering a RichTextWidget.
+- Support js.deform (available with Kotti >= 0.8) to only include
+  the JS when rendering a RichTextWidget.
 
 0.2.5
 -----
 
--   Fix JS errors caused by calling tinyMCEPopup.onInit.add from a
-    wrong place.
+- Fix JS errors caused by calling tinyMCEPopup.onInit.add from a
+  wrong place.
 
 0.2.4
 -----
 
--   Explicitly set relative_urls to false on TinyMCE initialization.
-    This fixes a bug when trying to add an image while adding a page.
+- Explicitly set relative_urls to false on TinyMCE initialization.
+  This fixes a bug when trying to add an image while adding a page.
 
 0.2.3
 -----
 
--   added German translation
--   use TinyMCE's translations
+- added German translation
+- use TinyMCE's translations
 
 0.2.2
 -----
 
--   fix requirement version conflict (now: Kotti>=0.7dev)
+- fix requirement version conflict (now: Kotti>=0.7dev)
 
 0.2.1
 -----
 
--   kotti_tinymce is a direct dependency of Kotti now
--   use Kotti's "new style" edit_needed
+- kotti_tinymce is a direct dependency of Kotti now
+- use Kotti's "new style" edit_needed
 
 0.2
 ---
 
--   get rid of Products.TinyMCE
--   use fanstatic
--   add custom 'kottibrowser' TinyMCE plugin
+- get rid of Products.TinyMCE
+- use fanstatic
+- add custom 'kottibrowser' TinyMCE plugin
 
 0.1 - Unreleased
 ----------------
