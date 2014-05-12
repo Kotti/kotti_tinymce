@@ -21,7 +21,7 @@
                  ${api.body_css_class}"
            onload="kottibrowserdialog.init();">
         <div class="row-fluid">
-            <div class="span12">
+            <div class="col-md-12">
                 <div tal:replace="api.render_template('kotti:templates/edit/breadcrumbs.pt')" />
             </div>
         </div>
@@ -30,7 +30,7 @@
                   method="POST"
                   enctype="multipart/form-data"
                   accept-charset="utf-8">
-                <div class="span4 well">
+                <div class="col-md-4 well">
                     <h3 i18n:translate="">Navigation</h3>
                     <ul class="nav nav-pills nav-stacked">
                         <li tal:condition="request.resource_url(context).rstrip('/') != request.application_url.rstrip('/')">
@@ -51,7 +51,7 @@
                         </tal:block>
                     </ul>
                 </div>
-                <div class="span8 well">
+                <div class="col-md-8 well">
                     <div class="alert alert-success"
                          tal:define="messages request.session.pop_flash('success')"
                          tal:condition="messages"
@@ -68,7 +68,7 @@
                         <img id="kottibrowser_image_preview" src="${request.resource_url(context)}image/span2" />
                         <hr />
                         <label for="url" i18n:translate="">Image URL</label>
-                        <input class="span12" type="text" name="url" id="url" value="${request.resource_url(context)}image" />
+                        <input class="col-md-12" type="text" name="url" id="url" value="${request.resource_url(context)}image" />
                         <input class="btn btn-primary" type="button" value="OK" onClick="kottibrowserdialog.submit();" />
                     </div>
                     <div tal:condition="upload_allowed">
@@ -81,11 +81,11 @@
                           ${message}
                         </div>
                         <label for="uploadtitle" i18n:translate="">Title</label>
-                        <input class="span12" type="text" name="uploadtitle" />
+                        <input class="col-md-12" type="text" name="uploadtitle" />
                         <label for="uploaddescription" i18n:translate="">Description</label>
-                        <textarea class="span12" name="uploaddescription"></textarea>
+                        <textarea class="col-md-12" name="uploaddescription"></textarea>
                         <label for="uploadfile" i18n:translate="">File</label>
-                        <input class="span12" type="file" name="uploadfile" />
+                        <input class="col-md-12" type="file" name="uploadfile" />
                         <input class="btn btn-primary" type="submit" name="upload" i18n:attributes="value" value="Upload" />
                     </div>
                 </div>
