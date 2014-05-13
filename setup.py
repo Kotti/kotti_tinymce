@@ -8,9 +8,9 @@ README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 install_requires = [
-    'js.tinymce==4.0.2',
-    # Kotti with fanstatic or js.deform is required
-    'Kotti>=0.7',
+    'js.tinymce==4.0.12',
+    # Kotti with Bootstrap 3 is required
+    'Kotti>=0.10dev',
 ],
 
 setup(

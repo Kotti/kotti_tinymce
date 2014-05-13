@@ -1,7 +1,7 @@
 <div xmlns:i18n="http://xml.zope.org/namespaces/i18n"
      xmlns:tal="http://xml.zope.org/namespaces/tal"
      tal:omit-tag="">
-<textarea id="${field.oid}" name="${field.name}" class='tinymce' tal:content="structure cstruct" />
+<textarea id="${field.oid}" name="${field.name}" class='tinymce form-control' tal:content="structure cstruct" />
 <span id="${field.oid}-preload" class="tinymce-preload" tal:content="structure cstruct" />
 <script language="javascript" type="text/javascript">
 (function($){
@@ -26,10 +26,10 @@
           },
           elements: oid,
           strict_loading_mode : true,
-          height: '${field.widget.height}',
-          width: '${field.widget.width}',
-          skin : '${field.widget.skin}',
-          theme : '${"modern" if field.widget.theme in [None, "advanced", "simple"] else field.widget.theme}',
+          height: '${field.widget.height | None}',
+          width: '${field.widget.width | None}',
+          skin : '${field.widget.skin | None}',
+          theme : '${"modern" if field.widget.theme in [None, "advanced", "simple"] else field.widget.theme | 'modern'}',
           theme_advanced_resizing : true,
           theme_advanced_toolbar_align : 'left',
           theme_advanced_toolbar_location : 'top',
