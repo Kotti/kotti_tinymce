@@ -6,90 +6,157 @@
       tal:define="dummy api.edit_needed"
       i18n:domain="kotti_tinymce"
       >
-    <head>
-        <meta charset="utf-8" />
-        <title>Kotti Browser</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- HTML5 shim, for IE6-8 support of HTML elements -->
-        <!--[if lt IE 9]>
-            <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-        <link rel="shortcut icon" href="${request.static_url('kotti:static/favicon.ico')}" />
-    </head>
-    <body class="${request.user is not None and 'logged-in'}
-                 view-${request.view_name or 'default'}
-                 ${api.body_css_class}"
-           onload="kottibrowserdialog.init();">
-        <div class="row-fluid">
-            <div class="col-md-12">
-                <div tal:replace="api.render_template('kotti:templates/edit/breadcrumbs.pt')" />
+  <head>
+    <meta charset="utf-8" />
+    <title>Kotti Browser</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+        <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon"
+          href="${request.static_url('kotti:static/favicon.ico')}" />
+  </head>
+  <body class="${request.user is not None and 'logged-in'}
+               view-${request.view_name or 'default'}
+               ${api.body_css_class}"
+         onload="kottibrowserdialog.init();">
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12" id="kottibrowser-breadcrumbs">
+            <div tal:replace="api.render_template('kotti:templates/edit/breadcrumbs.pt')" />
+          </div>
+      </div>
+      <form id="kottibrowser_form"
+            class="row"
+            method="POST"
+            enctype="multipart/form-data"
+            accept-charset="utf-8">
+
+        <!-- LEFT SIDE -->
+        <div class="col-md-4 col-sm-4">
+          <!-- NAVIGATION -->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title" i18n:translate="">Navigation</h3>
             </div>
+            <table class="table table-condensed table-hover">
+              <thead tal:condition="request.resource_url(context).rstrip('/') != request.application_url.rstrip('/')">
+                <tr>
+                  <th>
+                    <a href="${request.resource_url(context)}../@@kottibrowser">
+                      <i class="glyphicon glyphicon-arrow-up"></i>
+                      ..
+                    </a>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr tal:repeat="child context.children or context.parent.children">
+                  <td class="${child == context and 'active' or ''}">
+                    <a href="${request.resource_url(child)}@@kottibrowser">
+                      <i tal:condition="child.type == 'image'" class="glyphicon glyphicon-picture"></i>
+                      <i tal:condition="child.type == 'file'" class="glyphicon glyphicon-file"></i>
+                      <i tal:condition="child.type not in ('file', 'image', )" class="glyphicon glyphicon-list-alt"></i>
+                      ${child.title}
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="row-fluid">
-            <form id="kottibrowser_form"
-                  method="POST"
-                  enctype="multipart/form-data"
-                  accept-charset="utf-8">
-                <div class="col-md-4 well">
-                    <h3 i18n:translate="">Navigation</h3>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li tal:condition="request.resource_url(context).rstrip('/') != request.application_url.rstrip('/')">
-                            <a href="${request.resource_url(context)}../@@kottibrowser">
-                                <i class="icon-arrow-up"></i>
-                                ..
-                            </a>
-                        </li>
-                        <tal:block tal:repeat="child context.children or context.parent.children">
-                            <li class="${child == context and 'active' or ''}">
-                                <a href="${request.resource_url(child)}@@kottibrowser">
-                                    <i tal:condition="child.type == 'image'" class="icon-picture"></i>
-                                    <i tal:condition="child.type == 'file'" class="icon-file"></i>
-                                    <i tal:condition="child.type not in ('file', 'image', )" class="icon-list-alt"></i>
-                                    ${child.title}
-                                </a>
-                            </li>
-                        </tal:block>
-                    </ul>
+
+        <!-- RIGHT SIDE -->
+        <div class="col-md-8 col-sm-8">
+
+          <!-- MESSAGES -->
+          <div class="alert alert-success"
+               tal:define="messages request.session.pop_flash('success')"
+               tal:condition="messages"
+               tal:repeat="message messages">
+            ${message}
+          </div>
+
+          <!-- LINK -->
+          <div class="panel panel-default" tal:condition="link_selectable">
+            <div class="panel-heading">
+              <h3 class="panel-title" i18n:translate="">Selected Link</h3>
+            </div>
+            <div class="panel-body">
+              <div class="control-group">
+                <input type="text" name="url" id="url" class="form-control"
+                       value="${request.resource_url(context)}" /><br />
+              </div>
+            </div>
+            <div class="panel-footer">
+              <input class="btn btn-primary" type="button" value="OK"
+                     onClick="kottibrowserdialog.submit();" />
+            </div>
+          </div>
+
+          <!-- IMAGE -->
+          <div class="panel panel-default" tal:condition="image_selectable">
+            <div class="panel-heading">
+              <h3 class="panel-title" i18n:translate="">Selected Image</h3>
+            </div>
+            <div class="panel-body">
+              <img id="kottibrowser_image_preview" src="${request.resource_url(context)}image/span2" />
+              <div class="control-group">
+                <label for="url" i18n:translate="">Image URL</label>
+                <input class="form-control" type="text" name="url" id="url"
+                       value="${request.resource_url(context)}image" />
+              </div>
+            </div>
+            <div class="panel-footer">
+              <input class="btn btn-primary" type="button" value="OK"
+                     onClick="kottibrowserdialog.submit();" />
+            </div>
+          </div>
+
+          <!-- UPLOAD -->
+          <div class="panel panel-default" tal:condition="upload_allowed">
+              <div class="panel-heading">
+                <h3 class="panel-title" i18n:translate="">Upload</h3>
+              </div>
+              <div class="panel-body">
+                <div class="alert alert-error"
+                     tal:define="messages request.session.pop_flash('error')"
+                     tal:condition="messages"
+                     tal:repeat="message messages">
+                  ${message}
                 </div>
-                <div class="col-md-8 well">
-                    <div class="alert alert-success"
-                         tal:define="messages request.session.pop_flash('success')"
-                         tal:condition="messages"
-                         tal:repeat="message messages">
-                      ${message}
-                    </div>
-                    <div tal:condition="link_selectable">
-                        <h3 i18n:translate="">Selected Link</h3>
-                        <input type="text" name="url" id="url" value="${request.resource_url(context)}" /><br />
-                        <input class="btn btn-primary" type="button" value="OK" onClick="kottibrowserdialog.submit();" />
-                    </div>
-                    <div tal:condition="image_selectable">
-                        <h3 i18n:translate="">Selected Image</h3>
-                        <img id="kottibrowser_image_preview" src="${request.resource_url(context)}image/span2" />
-                        <hr />
-                        <label for="url" i18n:translate="">Image URL</label>
-                        <input class="col-md-12" type="text" name="url" id="url" value="${request.resource_url(context)}image" />
-                        <input class="btn btn-primary" type="button" value="OK" onClick="kottibrowserdialog.submit();" />
-                    </div>
-                    <div tal:condition="upload_allowed">
-                        <hr tal:condition="link_selectable or image_selectable" />
-                        <h3 i18n:translate="">Upload</h3>
-                        <div class="alert alert-error"
-                             tal:define="messages request.session.pop_flash('error')"
-                             tal:condition="messages"
-                             tal:repeat="message messages">
-                          ${message}
-                        </div>
-                        <label for="uploadtitle" i18n:translate="">Title</label>
-                        <input class="col-md-12" type="text" name="uploadtitle" />
-                        <label for="uploaddescription" i18n:translate="">Description</label>
-                        <textarea class="col-md-12" name="uploaddescription"></textarea>
-                        <label for="uploadfile" i18n:translate="">File</label>
-                        <input class="col-md-12" type="file" name="uploadfile" />
-                        <input class="btn btn-primary" type="submit" name="upload" i18n:attributes="value" value="Upload" />
-                    </div>
+                <div class="control-group">
+                  <label for="uploadtitle" i18n:translate="">Title</label>
+                  <input class="form-control" type="text" name="uploadtitle" />
                 </div>
-            </form>
+                <div class="control-group">
+                  <label for="uploaddescription" i18n:translate="">
+                    Description
+                  </label>
+                  <textarea class="form-control"
+                    name="uploaddescription"></textarea>
+                </div>
+                <div class="control-group">
+                  <label for="uploadfile" i18n:translate="">File</label>
+                  <input class="form-control" type="file" name="uploadfile" />
+                </div>
+              </div>
+              <div class="panel-footer">
+                <input class="btn btn-primary" type="submit" name="upload"
+                       i18n:attributes="value" value="Upload" />
+              </div>
+          </div>
         </div>
-    </body>
+      </form>
+
+    </div>
+  </body>
+  <script>
+    $(function () {
+      $('#kottibrowser-breadcrumbs a').each(function (e) {
+        this.href = this.href + '@@kottibrowser';
+      });
+    });
+  </script>
 </html>

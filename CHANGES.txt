@@ -4,7 +4,8 @@ ChangeLog
 0.5dev
 ------
 
-- No changes yet.
+- Revise templates to use Bootstrap 3.
+  THIS IS NOT BACKWARD COMPATIBLE AND WILL BREAK KOTTI < 0.10!
 
 0.4.2
 -----
