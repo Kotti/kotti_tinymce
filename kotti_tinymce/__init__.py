@@ -174,7 +174,7 @@ def includeme(config):
     try:
         # kotti >= 0.8
         from js.deform import resource_mapping
-        edit_needed = resource_mapping['tinymce'].append(kotti_tinymce)
+        resource_mapping['tinymce'].append(kotti_tinymce)
         resource_mapping['tinymce'].append(kottiimage_plugin)
         resource_mapping['tinymce'].append(codemirror_plugin)
     except ImportError:  # pragma: no cover

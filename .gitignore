@@ -11,3 +11,4 @@ local
 .coverage
 build
 bower_components
+node_modules
