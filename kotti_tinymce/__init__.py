@@ -4,7 +4,7 @@ import json
 
 from fanstatic import Library
 from fanstatic import Resource
-from js.tinymce import tinymce
+from js.deform import resource_mapping
 from kotti.resources import Content
 from kotti.resources import File
 from kotti.resources import Image
@@ -17,6 +17,11 @@ from pyramid.view import view_defaults
 
 library = Library('kotti_tinymce', 'static')
 
+tinymce = Resource(
+    library,
+    "tinymce.js",
+    minified="tinymce.min.js"
+)
 kotti_tinymce = Resource(
     library,
     "kotti_tinymce.js",
@@ -162,22 +167,16 @@ class KottiTinyMCE():
 
 
 def kotti_configure(settings):
-    settings['kotti.includes'] += ' kotti_tinymce'
+    settings['pyramid.includes'] += ' kotti_tinymce'
     settings['pyramid_deform.template_search_path'] = (
         'kotti_tinymce:templates/deform ' +
         settings['pyramid_deform.template_search_path'])
 
 
 def includeme(config):
+
     config.scan("kotti_tinymce")
     config.add_translation_dirs('kotti_tinymce:locale/')
-    try:
-        # kotti >= 0.8
-        from js.deform import resource_mapping
-        edit_needed = resource_mapping['tinymce'].append(kotti_tinymce)
-        resource_mapping['tinymce'].append(kottiimage_plugin)
-        resource_mapping['tinymce'].append(codemirror_plugin)
-    except ImportError:  # pragma: no cover
-        # kotti < 0.8
-        from kotti.static import edit_needed
-        edit_needed.add(kotti_tinymce)
+
+    resource_mapping['tinymce'] = [
+        tinymce, kotti_tinymce, kottiimage_plugin, codemirror_plugin]

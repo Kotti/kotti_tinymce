@@ -1,0 +1,28 @@
+{
+  "name": "kotti_tinymce",
+  "version": "0.5.0",
+  "homepage": "https://github.com/Kotti/kotti_tinymce",
+  "authors": [
+    "Andreas Kaiser <disko@binary-punks.com>"
+  ],
+  "description": "Kotti plugin for TinyMCE",
+  "license": "BSD",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "MANIFEST.in",
+    "development.ini",
+    "setup.*",
+    "kotti_tinymce/*.py",
+    "kotti_tinymce/locale",
+    "kotti_tinymce/templates",
+    "kotti_tinymce/tests"
+  ],
+  "dependencies": {
+    "tinymce": "~4.1.7",
+    "codemirror": "~4.8.0"
+  }
+}
