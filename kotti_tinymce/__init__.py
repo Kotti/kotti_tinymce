@@ -162,7 +162,7 @@ class KottiTinyMCE():
 
 
 def kotti_configure(settings):
-    settings['kotti.includes'] += ' kotti_tinymce'
+    settings['pyramid.includes'] += ' kotti_tinymce'
     settings['pyramid_deform.template_search_path'] = (
         'kotti_tinymce:templates/deform ' +
         settings['pyramid_deform.template_search_path'])
