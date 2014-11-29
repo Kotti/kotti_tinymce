@@ -14,7 +14,7 @@ install_requires = [
 
 setup(
     name='kotti_tinymce',
-    version='0.5.0',
+    version='0.6.0dev',
     description="TinyMCE plugins for Kotti",
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
