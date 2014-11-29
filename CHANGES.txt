@@ -7,6 +7,14 @@ ChangeLog
 - Revise templates to use Bootstrap 3.
   THIS IS NOT BACKWARD COMPATIBLE AND WILL BREAK KOTTI < 0.10!
 
+- Bundle our own TinyMCE instead of relying on ``js.tinymce``.  This allows
+  full control over the plugins.
+
+- Publish ``kotti-tinymce`` as Bower package.  This is especially useful if
+  you are developing a Kotti application and want to have full control over
+  your static assets instead of relying on (often outdated or incomplete)
+  ``js.whatever`` packages.  It also make upgrade much easier.
+
 0.4.2
 -----
 
