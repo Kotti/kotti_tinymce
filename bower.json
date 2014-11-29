@@ -20,5 +20,8 @@
     "kotti_tinymce/locale",
     "kotti_tinymce/templates",
     "kotti_tinymce/tests"
-  ]
+  ],
+  "dependencies": {
+    "tinymce": "~4.1.7"
+  }
 }

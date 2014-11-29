@@ -10,3 +10,4 @@ local
 *.pt.py
 .coverage
 build
+bower_components
