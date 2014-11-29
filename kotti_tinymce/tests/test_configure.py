@@ -9,13 +9,13 @@ from kotti_tinymce import kotti_tinymce
 def test_kotti_configure():
 
     settings = {
-        'kotti.includes': '',
+        'pyramid.includes': '',
         'pyramid_deform.template_search_path': 'foo',
     }
 
     kotti_configure(settings)
 
-    assert settings['kotti.includes'] == ' kotti_tinymce'
+    assert settings['pyramid.includes'] == ' kotti_tinymce'
     assert settings['pyramid_deform.template_search_path'] == \
         'kotti_tinymce:templates/deform foo'
 

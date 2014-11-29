@@ -8,14 +8,13 @@ README = open(os.path.join(here, 'README.rst')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 install_requires = [
-    'js.tinymce==4.0.12',
     # Kotti with Bootstrap 3 is required
     'Kotti>=0.10dev',
 ],
 
 setup(
     name='kotti_tinymce',
-    version='0.5a1',
+    version='0.5a2dev',
     description="TinyMCE plugins for Kotti",
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
@@ -36,8 +35,9 @@ setup(
     zip_safe=False,
     install_requires=install_requires,
     entry_points={
-        'fanstatic.libraries':
-            ["tinymce = kotti_tinymce:library", ],
+        'fanstatic.libraries': [
+            "kotti_tinymce = kotti_tinymce:library",
+        ],
     },
     message_extractors={
         "kotti_tinymce": [
