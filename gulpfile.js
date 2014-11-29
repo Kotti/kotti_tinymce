@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
 
 dest = './kotti_tinymce/static';
 
@@ -15,9 +16,19 @@ gulp.task('copy-vendor', function () {
     .pipe(gulp.dest(dest + '/codemirror/CodeMirror'));
 });
 
+gulp.task('uglify', function() {
+  gulp.src([dest + '/*.js',
+            '!' + dest + '/*.min.js'],
+           {base: dest})
+    .pipe(uglify())
+    .pipe(rename({suffix: '.min'}))
+    .pipe(gulp.dest(dest));
+});
+
 // Default task
 gulp.task(
   'default', [
-    'copy-vendor'
+    'copy-vendor',
+    'uglify'
   ]
 );
