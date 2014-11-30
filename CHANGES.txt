@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+0.6.0-dev
+---------
+
+- No changes yet.
+
 0.5.1
 -----
 
