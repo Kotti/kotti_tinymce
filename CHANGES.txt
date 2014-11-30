@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+0.5.1
+-----
+
+- Bundle TinyMCE's translation files.
+
 0.5.0
 -----
 
