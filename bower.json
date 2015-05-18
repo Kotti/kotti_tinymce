@@ -22,7 +22,7 @@
     "kotti_tinymce/tests"
   ],
   "dependencies": {
-    "tinymce": "~4.1.7",
+    "tinymce": "~4.1.10",
     "codemirror": "~4.8.0"
   }
 }
