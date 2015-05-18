@@ -1,6 +1,11 @@
 ChangeLog
 =========
 
+0.5.2
+-----
+
+- Upgrade TinyMCE to 4.1.10.
+
 0.5.1
 -----
 

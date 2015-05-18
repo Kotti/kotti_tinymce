@@ -1,6 +1,6 @@
 {
   "name": "kotti_tinymce",
-  "version": "0.5.1",
+  "version": "0.6.0-dev",
   "homepage": "https://github.com/Kotti/kotti_tinymce",
   "authors": [
     "Andreas Kaiser <disko@binary-punks.com>"
@@ -22,7 +22,7 @@
     "kotti_tinymce/tests"
   ],
   "dependencies": {
-    "tinymce": "~4.1.7",
+    "tinymce": "~4.1.10",
     "codemirror": "~4.8.0"
   }
 }
