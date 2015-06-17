@@ -23,6 +23,6 @@
   ],
   "dependencies": {
     "tinymce": "~4.1.10",
-    "codemirror": "~4.8.0"
+    "codemirror": "~5.3.0"
   }
 }

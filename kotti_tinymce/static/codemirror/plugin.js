@@ -21,7 +21,7 @@ tinymce.PluginManager.add('codemirror', function(editor, url) {
 		// Open editor window
 		var win = editor.windowManager.open({
 			title: 'HTML source code',
-			url: url + '/../../../kotti_tinymce/codemirror/source.html',
+			url: url + '/source.html',
 			width: 800,
 			height: 550,
 			resizable : true,
