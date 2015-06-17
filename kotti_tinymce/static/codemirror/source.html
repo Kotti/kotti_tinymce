@@ -189,7 +189,7 @@ function submit()
 	if (findDepth(curLineHTML, cc) !== 0) {
 		// Cursor is inside a <tag>, don't set cursor:
 		curLineHTML = curLineHTML.replace(cc, '');
-		doc.setLine(pos.line, curLineHTML);
+        doc.replaceRange(curLineHTML, {line: pos.line, ch: 0}, {line: pos.line + 1, ch: 0});
 	}
 
 	// Submit HTML to TinyMCE:
