@@ -4,8 +4,7 @@ ChangeLog
 0.6.0-dev
 ---------
 
-- Bugfix: replace ``setLine`` call to ``replaceRange`` (for ``CodeMirror`` 4 compatibility).
-  This fixes ``&#x0;`` appearing in the source code. See #26
+- No changes yet.
 
 0.5.2
 -----
