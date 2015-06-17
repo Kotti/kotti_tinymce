@@ -6,6 +6,12 @@ ChangeLog
 
 - No changes yet.
 
+0.5.3
+-----
+
+- Upgrade codemirror to 5.3.0 and codemirror plugin to 1.4.
+  This fixes #26.
+
 0.5.2
 -----
 
