@@ -6,6 +6,12 @@ ChangeLog
 
 - No changes yet.
 
+0.5.4
+-----
+
+- Upgrade TinyMCE to 4.2.5
+- Upgrade CodeMirror to 5.7.0
+
 0.5.3
 -----
 
