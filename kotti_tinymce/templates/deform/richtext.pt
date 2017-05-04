@@ -16,7 +16,7 @@
         jqoid_preload.remove();
         tinyMCE.init({
           mode : 'exact',
-          plugins : "codemirror,kottiimage,link,advlist,textcolor,contextmenu,table",
+          plugins : "codemirror,kottiimage,link,advlist,textcolor,contextmenu,table,lists",
           codemirror: {
             // codemirror **plugin** config options
             indentOnInit: false,

@@ -20,11 +20,7 @@
     var inner = CodeMirror.innerMode(cm.getMode(), token.state);
     if (inner.mode.name != "css") return;
 
-    if (token.type == "keyword" && "!important".indexOf(token.string) == 0)
-      return {list: ["!important"], from: CodeMirror.Pos(cur.line, token.start),
-              to: CodeMirror.Pos(cur.line, token.end)};
-
-    var start = token.start, end = cur.ch, word = token.string.slice(0, end - start);
+    var word = token.string, start = token.start, end = token.end;
     if (/[^\w$_-]/.test(word)) {
       word = ""; start = end = cur.ch;
     }

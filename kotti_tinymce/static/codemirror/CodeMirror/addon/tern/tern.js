@@ -59,7 +59,6 @@
     this.options = options || {};
     var plugins = this.options.plugins || (this.options.plugins = {});
     if (!plugins.doc_comment) plugins.doc_comment = true;
-    this.docs = Object.create(null);
     if (this.options.useWorker) {
       this.server = new WorkerServer(this);
     } else {
@@ -70,6 +69,7 @@
         plugins: plugins
       });
     }
+    this.docs = Object.create(null);
     this.trackChange = function(doc, change) { trackChange(self, doc, change); };
 
     this.cachedArgHints = null;
@@ -106,9 +106,7 @@
       cm.showHint({hint: this.getHint});
     },
 
-    showType: function(cm, pos, c) { showContextInfo(this, cm, pos, "type", c); },
-
-    showDocs: function(cm, pos, c) { showContextInfo(this, cm, pos, "documentation", c); },
+    showType: function(cm, pos, c) { showType(this, cm, pos, c); },
 
     updateArgHints: function(cm) { updateArgHints(this, cm); },
 
@@ -124,21 +122,12 @@
       var self = this;
       var doc = findDoc(this, cm.getDoc());
       var request = buildRequest(this, doc, query, pos);
-      var extraOptions = request.query && this.options.queryOptions && this.options.queryOptions[request.query.type]
-      if (extraOptions) for (var prop in extraOptions) request.query[prop] = extraOptions[prop];
 
       this.server.request(request, function (error, data) {
         if (!error && self.options.responseFilter)
           data = self.options.responseFilter(doc, query, request, error, data);
         c(error, data);
       });
-    },
-
-    destroy: function () {
-      if (this.worker) {
-        this.worker.terminate();
-        this.worker = null;
-      }
     }
   };
 
@@ -216,7 +205,7 @@
         var completion = data.completions[i], className = typeToIcon(completion.type);
         if (data.guess) className += " " + cls + "guess";
         completions.push({text: completion.name + after,
-                          displayText: completion.displayName || completion.name,
+                          displayText: completion.name,
                           className: className,
                           data: completion});
       }
@@ -250,8 +239,8 @@
 
   // Type queries
 
-  function showContextInfo(ts, cm, pos, queryName, c) {
-    ts.request(cm, queryName, function(error, data) {
+  function showType(ts, cm, pos, c) {
+    ts.request(cm, "type", function(error, data) {
       if (error) return showError(ts, cm, error);
       if (ts.options.typeTip) {
         var tip = ts.options.typeTip(data);
@@ -261,12 +250,10 @@
           tip.appendChild(document.createTextNode(" — " + data.doc));
         if (data.url) {
           tip.appendChild(document.createTextNode(" "));
-          var child = tip.appendChild(elt("a", null, "[docs]"));
-          child.href = data.url;
-          child.target = "_blank";
+          tip.appendChild(elt("a", null, "[docs]")).href = data.url;
         }
       }
-      tempTooltip(cm, tip, ts);
+      tempTooltip(cm, tip);
       if (c) c();
     }, pos);
   }
@@ -444,8 +431,8 @@
 
   function atInterestingExpression(cm) {
     var pos = cm.getCursor("end"), tok = cm.getTokenAt(pos);
-    if (tok.start < pos.ch && tok.type == "comment") return false;
-    return /[\w)\]]/.test(cm.getLine(pos.line).slice(Math.max(pos.ch - 1, 0), pos.ch + 1));
+    if (tok.start < pos.ch && (tok.type == "comment" || tok.type == "string")) return false;
+    return /\w/.test(cm.getLine(pos.line).slice(Math.max(pos.ch - 1, 0), pos.ch + 1));
   }
 
   // Variable renaming
@@ -466,12 +453,11 @@
     ts.request(cm, {type: "refs"}, function(error, data) {
       if (error) return showError(ts, cm, error);
       var ranges = [], cur = 0;
-      var curPos = cm.getCursor();
       for (var i = 0; i < data.refs.length; i++) {
         var ref = data.refs[i];
         if (ref.file == name) {
           ranges.push({anchor: ref.start, head: ref.end});
-          if (cmpPos(curPos, ref.start) >= 0 && cmpPos(curPos, ref.end) <= 0)
+          if (cmpPos(cur, ref.start) >= 0 && cmpPos(cur, ref.end) <= 0)
             cur = ranges.length - 1;
         }
       }
@@ -593,34 +579,16 @@
 
   // Tooltips
 
-  function tempTooltip(cm, content, ts) {
-    if (cm.state.ternTooltip) remove(cm.state.ternTooltip);
+  function tempTooltip(cm, content) {
     var where = cm.cursorCoords();
-    var tip = cm.state.ternTooltip = makeTooltip(where.right + 1, where.bottom, content);
-    function maybeClear() {
-      old = true;
-      if (!mouseOnTip) clear();
-    }
+    var tip = makeTooltip(where.right + 1, where.bottom, content);
     function clear() {
-      cm.state.ternTooltip = null;
       if (!tip.parentNode) return;
       cm.off("cursorActivity", clear);
-      cm.off('blur', clear);
-      cm.off('scroll', clear);
       fadeOut(tip);
     }
-    var mouseOnTip = false, old = false;
-    CodeMirror.on(tip, "mousemove", function() { mouseOnTip = true; });
-    CodeMirror.on(tip, "mouseout", function(e) {
-      if (!CodeMirror.contains(tip, e.relatedTarget || e.toElement)) {
-        if (old) clear();
-        else mouseOnTip = false;
-      }
-    });
-    setTimeout(maybeClear, ts.options.hintDelay ? ts.options.hintDelay : 1700);
+    setTimeout(clear, 1700);
     cm.on("cursorActivity", clear);
-    cm.on('blur', clear);
-    cm.on('scroll', clear);
   }
 
   function makeTooltip(x, y, content) {
@@ -645,7 +613,7 @@
     if (ts.options.showError)
       ts.options.showError(cm, msg);
     else
-      tempTooltip(cm, String(msg), ts);
+      tempTooltip(cm, String(msg));
   }
 
   function closeArgHints(ts) {
@@ -661,7 +629,7 @@
   // Worker wrapper
 
   function WorkerServer(ts) {
-    var worker = ts.worker = new Worker(ts.options.workerScript);
+    var worker = new Worker(ts.options.workerScript);
     worker.postMessage({type: "init",
                         defs: ts.options.defs,
                         plugins: ts.options.plugins,
