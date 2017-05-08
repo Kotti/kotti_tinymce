@@ -12,3 +12,5 @@ local
 build
 bower_components
 node_modules
+.Python
+lib

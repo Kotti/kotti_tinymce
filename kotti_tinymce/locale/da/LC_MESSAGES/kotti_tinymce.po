@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kotti_tinymce 0.4b5dev\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2014-11-29 04:49+0100\n"
+"POT-Creation-Date: 2017-05-08 09:38+0200\n"
 "PO-Revision-Date: 2013-08-14 13:55+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: da <LL@li.org>\n"
@@ -19,48 +19,48 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: kotti_tinymce/__init__.py:157
-msgid "Successfully uploaded."
-msgstr ""
-
-#: kotti_tinymce/__init__.py:123 kotti_tinymce/__init__.py:131
+#: kotti_tinymce/__init__.py:128 kotti_tinymce/__init__.py:136
 msgid "Please select a file to upload."
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:47
+#: kotti_tinymce/__init__.py:162
+msgid "Successfully uploaded."
+msgstr ""
+
+#: kotti_tinymce/templates/kottibrowser.pt:41
 msgid "Navigation"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:122
+#: kotti_tinymce/templates/kottibrowser.pt:84
 msgid "Selected Link"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:152
+#: kotti_tinymce/templates/kottibrowser.pt:101
 msgid "Selected Image"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:163
+#: kotti_tinymce/templates/kottibrowser.pt:106
 msgid "Image URL"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:187
-#: kotti_tinymce/templates/kottibrowser.pt:232
+#: kotti_tinymce/templates/kottibrowser.pt:120
+#: kotti_tinymce/templates/kottibrowser.pt:147
 msgid "Upload"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:201
+#: kotti_tinymce/templates/kottibrowser.pt:130
 msgid "Title"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:210
+#: kotti_tinymce/templates/kottibrowser.pt:134
 msgid "Description"
 msgstr ""
 
-#: kotti_tinymce/templates/kottibrowser.pt:221
+#: kotti_tinymce/templates/kottibrowser.pt:141
 msgid "File"
 msgstr ""
 
 #. Default: en
-#: kotti_tinymce/templates/deform/richtext.pt:47
+#: kotti_tinymce/templates/deform/richtext.pt:48
 msgid "language-code"
 msgstr "da"
