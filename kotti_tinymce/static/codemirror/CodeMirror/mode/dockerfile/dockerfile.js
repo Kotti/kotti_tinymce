@@ -24,12 +24,14 @@
       // Block comment: This is a line starting with a comment
       {
         regex: /#.*$/,
-        token: "comment"
+        token: "comment",
+        next: "start"
       },
       // Highlight an instruction without any arguments (for convenience)
       {
         regex: instructionOnlyLine,
-        token: "variable-2"
+        token: "variable-2",
+        next: "start"
       },
       // Highlight an instruction followed by arguments
       {
@@ -37,9 +39,10 @@
         token: ["variable-2", null],
         next: "arguments"
       },
+      // Fail-safe return to start
       {
-        regex: /./,
-        token: null
+        token: null,
+        next: "start"
       }
     ],
     arguments: [
@@ -51,7 +54,8 @@
       },
       {
         regex: /[^#]+\\$/,
-        token: null
+        token: null,
+        next: "arguments"
       },
       {
         // Match everything except for the inline comment
@@ -69,10 +73,7 @@
         token: null,
         next: "start"
       }
-    ],
-      meta: {
-          lineComment: "#"
-      }
+    ]
   });
 
   CodeMirror.defineMIME("text/x-dockerfile", "dockerfile");

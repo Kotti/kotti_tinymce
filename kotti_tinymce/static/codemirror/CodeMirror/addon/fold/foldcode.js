@@ -142,8 +142,4 @@
       return editorOptions[name];
     return defaultOptions[name];
   }
-
-  CodeMirror.defineExtension("foldOption", function(options, name) {
-    return getOption(this, options, name);
-  });
 });
