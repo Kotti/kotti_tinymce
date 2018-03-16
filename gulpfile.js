@@ -8,11 +8,12 @@ let dest = './kotti_tinymce/static';
 
 gulp.task('delete-vendor', function () {
   return del([
-    `${dest}tinymce*`,
-    `${dest}codemirror`,
-    `${dest}plugins`,
-    `${dest}skins`,
-    `${dest}themes`,
+    `${dest}/tinymce*`,
+    `${dest}/langs`,
+    `${dest}/codemirror`,
+    `${dest}/plugins`,
+    `${dest}/skins`,
+    `${dest}/themes`
   ])
 });
 
@@ -43,6 +44,7 @@ gulp.task('uglify', ['copy-vendor'], function() {
     .pipe(gulp.dest(dest));
 });
 
+// gulp.task('copy-plugins', function () {
 gulp.task('copy-plugins', ['uglify'], function () {
   let s1 = gulp.src(`${dest}/kottiimage_plugin.js`, {base: dest})
     .pipe(rename('plugin.js'))
@@ -56,7 +58,7 @@ gulp.task('copy-plugins', ['uglify'], function () {
     .pipe(gulp.dest(`${dest}/plugins`));
 
   let srcCodeMirror = 'node_modules/tinymce-codemirror/plugins/codemirror';
-  let s4 = gulp.src(`${srcCodeMirror}/*`)
+  let s4 = gulp.src([`${srcCodeMirror}/*.js`, `${srcCodeMirror}/*.html`])
     .pipe(gulp.dest(`${dest}/plugins/codemirror`));
 
   let s5 = gulp.src(`${srcCodeMirror}/langs/*.js`)
@@ -65,12 +67,17 @@ gulp.task('copy-plugins', ['uglify'], function () {
   return mergeStream(s1, s2, s3, s4, s5)
 });
 
+gulp.task('cleanup', ['copy-plugins'], function () {
+  del(`${dest}/codemirror`)
+});
+
 // Default task
 gulp.task(
   'default', [
     'delete-vendor',
     'copy-vendor',
     'uglify',
-    'copy-plugins'
+    'copy-plugins',
+    'cleanup'
   ]
 );
