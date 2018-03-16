@@ -1,8 +1,8 @@
 ChangeLog
 =========
 
-unreleased
-----------
+0.7.0 - 2018-03-16
+------------------
 
 - Fix compatibility with Kotti 2.x
 - Import ``Image`` from ``kotti_image`` **if installed**.
