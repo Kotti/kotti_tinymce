@@ -1,6 +1,16 @@
 ChangeLog
 =========
 
+0.7.0 - 2018-03-16
+------------------
+
+- Fix compatibility with Kotti 2.x
+- Import ``Image`` from ``kotti_image`` **if installed**.
+  ``kotti_image`` is now an *optional* dependency.
+  If present, the ``kottiimage_plugin`` for TinyMCE will be activated.
+- Upgrade TinyMCE to 4.7.9
+- Upgrade CodeMirror to 5.35.0
+
 0.6.0
 -----
 

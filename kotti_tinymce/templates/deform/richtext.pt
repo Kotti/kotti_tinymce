@@ -19,6 +19,7 @@
           plugins : "codemirror,kottiimage,link,advlist,textcolor,contextmenu,table,lists",
           codemirror: {
             // codemirror **plugin** config options
+            path: 'CodeMirror',
             indentOnInit: false,
             config: {
               // codemirror config options
@@ -40,6 +41,7 @@
           table_cell_limit : 100,
           table_row_limit : 5,
           table_col_limit : 5,
+          convert_urls: false,
           relative_urls: false,
           image_list : 'external_image_list',
           image_advtab: true,

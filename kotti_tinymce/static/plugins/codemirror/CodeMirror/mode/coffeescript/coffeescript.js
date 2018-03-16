@@ -267,17 +267,6 @@ CodeMirror.defineMode("coffeescript", function(conf, parserConf) {
     var style = state.tokenize(stream, state);
     var current = stream.current();
 
-    // Handle "." connected identifiers
-    if (false && current === ".") {
-      style = state.tokenize(stream, state);
-      current = stream.current();
-      if (/^\.[\w$]+$/.test(current)) {
-        return "variable";
-      } else {
-        return ERRORCLASS;
-      }
-    }
-
     // Handle scope changes.
     if (current === "return") {
       state.dedent = true;
@@ -359,6 +348,10 @@ CodeMirror.defineMode("coffeescript", function(conf, parserConf) {
   };
   return external;
 });
+
+// IANA registered media type
+// https://www.iana.org/assignments/media-types/
+CodeMirror.defineMIME("application/vnd.coffeescript", "coffeescript");
 
 CodeMirror.defineMIME("text/x-coffeescript", "coffeescript");
 CodeMirror.defineMIME("text/coffeescript", "coffeescript");
