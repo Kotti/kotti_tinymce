@@ -1,6 +1,6 @@
 {
   "name": "kotti_tinymce",
-  "version": "0.7.0",
+  "version": "0.7.1.dev0",
   "description": "Kotti plugin for TinyMCE",
   "main": "index.js",
   "scripts": {
