@@ -1,8 +1,8 @@
 # How to contribute
 
-- [Getting help](#getting-help-)
-- [Submitting bug reports](#submitting-bug-reports-)
-- [Contributing code](#contributing-code-)
+- [Getting help](#getting-help)
+- [Submitting bug reports](#submitting-bug-reports)
+- [Contributing code](#contributing-code)
 
 ## Getting help
 
@@ -47,6 +47,10 @@ should be asked on the
 
 ## Contributing code
 
+Note that we are not accepting any new addons or modes into the main
+distribution. If you've written such a module, please distribute it as
+a separate NPM package.
+
 - Make sure you have a [GitHub Account](https://github.com/signup/free)
 - Fork [CodeMirror](https://github.com/codemirror/CodeMirror/)
   ([how to fork a repo](https://help.github.com/articles/fork-a-repo))
@@ -78,7 +82,7 @@ By contributing code to CodeMirror you
 ### Coding standards
 
 - 2 spaces per indentation level, no tabs.
-- Include semicolons after statements.
+
 - Note that the linter (`bin/lint`) which is run after each commit
   complains about unused variables and functions. Prefix their names
   with an underscore to muffle it.

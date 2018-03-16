@@ -4,7 +4,11 @@ ChangeLog
 unreleased
 ----------
 
-- no changes yet.
+- Import ``Image`` from ``kotti_image`` **if installed**.
+  ``kotti_image`` is now an *optional* dependency.
+  If present, the ``kottiimage_plugin`` for TinyMCE will be activated.
+- Upgrade TinyMCE to 4.5.7
+- Upgrade CodeMirror to 5.25.0
 
 0.6.0
 -----
