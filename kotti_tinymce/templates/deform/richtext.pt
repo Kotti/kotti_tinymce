@@ -23,6 +23,8 @@
             indentOnInit: false,
             config: {
               // codemirror config options
+              lineNumbers: true,
+              mode: "htmlmixed"
             }
           },
           elements: oid,

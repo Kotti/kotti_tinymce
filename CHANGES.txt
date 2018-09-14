@@ -1,6 +1,16 @@
 ChangeLog
 =========
 
+unreleased
+----------
+
+- No changes yet
+
+0.7.1 - 2018-09-14
+------------------
+
+- Fix broken CodeMirror plugin (fixes #31).
+
 0.7.0 - 2018-03-16
 ------------------
 
